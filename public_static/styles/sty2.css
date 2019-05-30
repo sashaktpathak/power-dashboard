@@ -231,13 +231,20 @@ td
   {
       background: white;
       padding: 15px;
+      box-shadow: 2px 5px 5px #ddd;
+      margin: 10px;
+      margin-left: 10px !important;
+      left: 50px;
       transition: all 0.6s;
   }
   .bg-voltage
   {
       background: white;
       padding: 15px;
-      
+      box-shadow: 0px 5px 4.5px 0px #ddd;
+      margin-top: 15px;
+      float: right;
+      right: 50px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -247,16 +254,21 @@ td
   {
       background: white;
       padding: 15px;
+      left: 50px;
+      margin-left: 10px;
+      box-shadow: 2px 3px 3px 2px #ddd;
+      margin-bottom: 20px;
       transition: all 0.6s;
-      margin-top: -140px;
-
   }
   .bg-address
   {
       background: white;
       padding: 15px;
+      left: 50px;
+      margin-left: 10px;
+      box-shadow: 2px 3px 3px 2px #ddd;
+      margin-bottom: 20px;
       transition: all 0.6s;
-      padding-bottom: 20px;
   }
   /* .bg-phases:hover , .bg-configure:hover , .bg-voltage:hover
   {

@@ -1,29 +1,30 @@
 $("#header").load("header.html")
 $("#footer").load("footer.html")
 $('.phases').load('part1.html')
-$('.noncout').load('part2.html')
-$('.configure').load('part3.html')
-var slider = document.getElementById("myRange1");
 
-slider.oninput = function () {
-    output.innerHTML = this.value;
-}
-slider.disabled = true;
-slider = document.getElementById("myRange2");
-slider.disabled = true;
-slider = document.getElementById("myRange3");
-slider.disabled = true;
-slider = document.getElementById("myRange4");
-slider.disabled = true;
-slider = document.getElementById("myRange5");
-slider.disabled = true;
-slider = document.getElementById("myRange6");
-slider.disabled = true;
-slider = document.getElementById("myRange7");
-slider.disabled = true;
-slider = document.getElementById("myRange8");
-slider.disabled = true;
 $(document).ready(function () {
+
+    $('.noncout').load('part2.html', function () {
+        var slider = document.getElementById("myRange1");
+        slider.oninput = function () {
+            output.innerHTML = this.value;
+        }
+        slider.disabled = true;
+        slider = document.getElementById("myRange2");
+        slider.disabled = true;
+        slider = document.getElementById("myRange3");
+        slider.disabled = true;
+        slider = document.getElementById("myRange4");
+        slider.disabled = true;
+        slider = document.getElementById("myRange5");
+        slider.disabled = true;
+        slider = document.getElementById("myRange6");
+        slider.disabled = true;
+        slider = document.getElementById("myRange7");
+        slider.disabled = true;
+        slider = document.getElementById("myRange8");
+        slider.disabled = true;
+    })
     $.post('/getData1', (data) => {
         var t = 0, i = 1
         $('#3phase_tb1 tr').each(function () {
@@ -109,19 +110,26 @@ $(document).ready(function () {
         })
     })
     getData3()
-    $('.btnb').click(function () {
-        x = $(this).html()
-        y = $(this).prev().parent().find('.id').html()
-        y = parseInt(y)
-        if (x == 'Pulse')
-            x = 1
-        else if (x == 'Low')
-            x = 2
-        else
-            x = 3
-        $.post('/putData', { value: x, rowv: (y + 32) }, function (data) {
-            console.log(data)
-            getData3()
+
+    $('.configure').load('part3.html', function () {
+
+
+        $('.btnb').click(function () {
+            console.log("g")
+            x = $(this).html()
+            y = $(this).prev().parent().find('.id').html()
+            console.log(y)
+            y = parseInt(y)
+            if (x == 'Pulse')
+                x = 1
+            else if (x == 'Low')
+                x = 2
+            else
+                x = 3
+            $.post('/putData', { value: x, rowv: (y + 32) }, function (data) {
+                console.log(data)
+                getData3()
+            })
         })
     })
     $('.btn-addr').click(function () {

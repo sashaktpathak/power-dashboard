@@ -5,13 +5,13 @@ var bodyParser = require('body-parser')
 var morgan = require('morgan')
 var app = express()
 
-var port = process.env.PORT || 1338
+var port = process.env.PORT || 1337
 
 var passport = require('passport')
 var flash = require('connect-flash')
 
 require('./config/passport')(passport);
-
+app.engine('html', require('ejs').renderFile);
 app.use(morgan('dev'))
 app.use(cookieParser())
 app.use(bodyParser.urlencoded({
@@ -25,7 +25,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
-app.use('/home', express.static(__dirname + '/public_static'))
+//app.use('/home', express.static(__dirname + '/public_static'))
 
 
 app.set('view engine', 'ejs')

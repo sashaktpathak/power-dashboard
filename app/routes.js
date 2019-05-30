@@ -1,7 +1,9 @@
 var mysql = require('mysql')
 var dbconfig = require('../config/database')
 var connection = mysql.createConnection(dbconfig.connection)
-var rows_result;
+var express = require('express')
+var path = require('path')
+
 module.exports = function (app, passport) {
     app.get('/', function (req, res) {
         res.render('index.ejs')
@@ -11,7 +13,7 @@ module.exports = function (app, passport) {
     })
 
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/profile',
+        successRedirect: '/home',
         failureRedirect: '/login',
         failureFlash: true
     }),
@@ -31,16 +33,17 @@ module.exports = function (app, passport) {
     })
 
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect: '/profile',
+        successRedirect: '/home',
         failureRedirect: '/signup',
         failureFlash: true
     }))
 
-    app.get('/profile', isLoggedIn, function (req, res) {
-        res.render('profile.ejs', {
-            user: req.user
-        })
-    })
+    /*app.get('/home', isLoggedIn, function (req, res) {
+        res.render('../public_static/index.html')
+    })*/
+
+    let reqPath = path.join(__dirname, '../')
+    app.use('/home', express.static(reqPath + 'public_static'))
 
     app.get('/logout', function (req, res) {
         req.logout()
