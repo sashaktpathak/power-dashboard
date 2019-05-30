@@ -25,7 +25,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
-//app.use('/home', express.static(__dirname + '/public_static'))
+app.use(express.static(__dirname + '/public_static'))
 
 
 app.set('view engine', 'ejs')

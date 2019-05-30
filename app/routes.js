@@ -38,12 +38,12 @@ module.exports = function (app, passport) {
         failureFlash: true
     }))
 
-    /*app.get('/home', isLoggedIn, function (req, res) {
-        res.render('../public_static/index.html')
-    })*/
-
     let reqPath = path.join(__dirname, '../')
-    app.use('/home', express.static(reqPath + 'public_static'))
+    app.get('/home', isLoggedIn, function (req, res) {
+        res.render('home')
+    })
+
+    //app.use('/home', express.static(reqPath + 'public_static'))
 
     app.get('/logout', function (req, res) {
         req.logout()
