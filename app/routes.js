@@ -5,15 +5,15 @@ var express = require('express')
 var path = require('path')
 
 module.exports = function (app, passport) {
-    app.get('/', function (req, res) {
+    /*app.get('/', function (req, res) {
         res.render('index.ejs')
-    })
+    })*/
     app.get('/login', function (req, res) {
         res.render('login.ejs', { message: req.flash('loginMessage') })
     })
 
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/home',
+        successRedirect: '/',
         failureRedirect: '/login',
         failureFlash: true
     }),
@@ -33,13 +33,13 @@ module.exports = function (app, passport) {
     })
 
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect: '/home',
+        successRedirect: '/',
         failureRedirect: '/signup',
         failureFlash: true
     }))
 
     let reqPath = path.join(__dirname, '../')
-    app.get('/home', isLoggedIn, function (req, res) {
+    app.get('/', isLoggedIn, function (req, res) {
         res.render('home')
     })
 
@@ -47,7 +47,7 @@ module.exports = function (app, passport) {
 
     app.get('/logout', function (req, res) {
         req.logout()
-        res.redirect('/')
+        res.redirect('/login')
     })
 
     app.post('/getData1', function (req, res) {
@@ -95,7 +95,7 @@ function isLoggedIn(req, res, next) {
         return next()
     }
 
-    res.redirect('/')
+    res.redirect('/login')
 }
 
 function getData1(res) {

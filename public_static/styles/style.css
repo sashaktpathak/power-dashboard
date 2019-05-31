@@ -146,7 +146,6 @@ td
   }
   .btnb
   {
-      background: rgba(63, 126, 209, 0.6);
       border-radius: 0px;
       margin: 10px;
       width: 100px;
@@ -161,10 +160,20 @@ td
   {
       margin: 10px;
   }
+  .bon
+  {
+      background: rgba(209, 18, 18, 0.5);
+      box-shadow: 5px 5px #f56b52;
+  }
+  .boff
+  {
+    background: rgba(5, 194, 5, 0.5);
+    box-shadow: 5px 5px #7ad450;
+  }
   .bactive
   {
-      background: rgba(61, 207, 243, 0.8);
-      box-shadow: 5px 5px #44a5f5;
+      background: rgba(245, 132, 39, 0.5);
+      box-shadow: 5px 5px #f3a257;
   }
   .btnb:hover
   {
@@ -232,31 +241,42 @@ td
       background: white;
       padding: 15px;
       transition: all 0.6s;
+      margin: 25px;
+      left: 15px;
+      box-shadow: 1px 1px 1px 1px #666;
   }
   .bg-voltage
   {
       background: white;
       padding: 15px;
-      
       display: flex;
       justify-content: center;
       align-items: center;
       transition: all 0.6s;
+      margin: 25px;
+      box-shadow: 1px 1px 1px 1px #666;
+      left: 15px;
   }
   .bg-configure
   {
       background: white;
       padding: 15px;
       transition: all 0.6s;
-      margin-top: -140px;
-
+      margin: 25px;
+      padding-bottom: 100px;
+      box-shadow: 1px 1px 1px 1px #666;
+      right: -25px;
   }
   .bg-address
   {
       background: white;
       padding: 15px;
       transition: all 0.6s;
-      padding-bottom: 20px;
+      box-shadow: 1px 1px 1px 1px #666;
+      padding-bottom: 200px;
+      margin: 15px;
+      right: -25px;
+      margin-top: -150px;
   }
   /* .bg-phases:hover , .bg-configure:hover , .bg-voltage:hover
   {
@@ -274,6 +294,23 @@ td
         left: 0px;
         right: 0px;
       }
+  }
+  @media screen and (max-width: 1300px) and (min-width: 1000px)
+  {
+      .bg-phases
+      {
+          width: 60%;
+      }
+      .bg-voltage
+      {
+          width: 60%;
+      }
+      .bg-configure, .bg-address
+      {
+          width: 38%;
+          right: -25px;
+      }
+
   }
 
 
