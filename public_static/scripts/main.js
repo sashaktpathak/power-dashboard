@@ -25,92 +25,94 @@ $(document).ready(function () {
         slider = document.getElementById("myRange8");
         slider.disabled = true;
     })
-    $.post('/getData1', (data) => {
-        var t = 0, i = 1
-        $('#3phase_tb1 tr').each(function () {
-            if ($(this)[0].childNodes.length == 11 || $(this)[0].childNodes.length == 7) {
-                if (data[t].status == 1) {
-                    if ($(this).find('.phase_status').length) {
-                        $(this).find('.phase_status').removeClass('phase_inactive')
-                    }
-                }
-                else {
-                    if ($(this).find('.phase_status').length) {
-                        $(this).find('.phase_status').addClass('phase_inactive')
-                    }
-                }
-                if (t % 3 == 0 && t < 23) {
-                    if ($(this).find('.status').length) {
-                        if (data[t].status == 1 && data[t + 1].status == 1 && data[t + 2].status == 1) {
-                            $(this).find('.status').attr('class', 'status active')
-                        } else if (data[t].status == 0 && data[t + 1].status == 0 && data[t + 2].status == 0) {
-                            $(this).find('.status').attr('class', 'status inactive')
-                        } else {
-                            $(this).find('.status').attr('class', 'status trip')
+    setInterval(function () {
+        $.post('/getData1', (data) => {
+            var t = 0, i = 1
+            $('#3phase_tb1 tr').each(function () {
+                if ($(this)[0].childNodes.length == 11 || $(this)[0].childNodes.length == 7) {
+                    if (data[t].status == 1) {
+                        if ($(this).find('.phase_status').length) {
+                            $(this).find('.phase_status').removeClass('phase_inactive')
                         }
                     }
-                }
-                t = t + 1
-            }
-        })
-
-        $('#3phase_tb2 tr').each(function () {
-            if ($(this)[0].childNodes.length == 11 || $(this)[0].childNodes.length == 7) {
-                if (data[t].status == 1) {
-                    if ($(this).find('.phase_status').length) {
-                        $(this).find('.phase_status').removeClass('phase_inactive')
-                    }
-                }
-                else {
-                    if ($(this).find('.phase_status').length) {
-                        $(this).find('.phase_status').addClass('phase_inactive')
-                    }
-                }
-                if (t % 3 == 0 && t < 23) {
-                    if ($(this).find('.status').length) {
-                        if (data[t].status == 1 && data[t + 1].status == 1 && data[t + 2].status == 1) {
-                            $(this).find('.status').attr('class', 'status active')
-                        } else if (data[t].status == 0 && data[t + 1].status == 0 && data[t + 2].status == 0) {
-                            $(this).find('.status').attr('class', 'status inactive')
-                        } else {
-                            $(this).find('.status').attr('class', 'status trip')
+                    else {
+                        if ($(this).find('.phase_status').length) {
+                            $(this).find('.phase_status').addClass('phase_inactive')
                         }
                     }
+                    if (t % 3 == 0 && t < 23) {
+                        if ($(this).find('.status').length) {
+                            if (data[t].status == 1 && data[t + 1].status == 1 && data[t + 2].status == 1) {
+                                $(this).find('.status').attr('class', 'status active')
+                            } else if (data[t].status == 0 && data[t + 1].status == 0 && data[t + 2].status == 0) {
+                                $(this).find('.status').attr('class', 'status inactive')
+                            } else {
+                                $(this).find('.status').attr('class', 'status trip')
+                            }
+                        }
+                    }
+                    t = t + 1
                 }
-                t = t + 1
-            }
-        })
-
-    })
-
-
-    $.post('/getData2', function (data) {
-        t = 0
-        $('.slider').each(function () {
-            if (data[t].status == 0)
-                $(this).attr('value', '1')
-            if (data[t].status == 2)
-                $(this).attr('value', '2')
-            if (data[t].status == 1)
-                $(this).attr('value', '3')
-            i = 0
-            $('.range-img').each(function () {
-                if (i == t) {
-                    if (data[t].status == 0)
-                        $(this).attr('src', './images/bulboff.png')
-                    if (data[t].status == 2)
-                        $(this).attr('src', './images/partial.jpg')
-                    if (data[t].status == 1)
-                        $(this).attr('src', './images/bulbon.png')
-                }
-                i = i + 1
             })
-            //./images/bulboff.png
-            t = t + 1
-        })
-    })
-    getData3()
 
+            $('#3phase_tb2 tr').each(function () {
+                if ($(this)[0].childNodes.length == 11 || $(this)[0].childNodes.length == 7) {
+                    if (data[t].status == 1) {
+                        if ($(this).find('.phase_status').length) {
+                            $(this).find('.phase_status').removeClass('phase_inactive')
+                        }
+                    }
+                    else {
+                        if ($(this).find('.phase_status').length) {
+                            $(this).find('.phase_status').addClass('phase_inactive')
+                        }
+                    }
+                    if (t % 3 == 0 && t < 23) {
+                        if ($(this).find('.status').length) {
+                            if (data[t].status == 1 && data[t + 1].status == 1 && data[t + 2].status == 1) {
+                                $(this).find('.status').attr('class', 'status active')
+                            } else if (data[t].status == 0 && data[t + 1].status == 0 && data[t + 2].status == 0) {
+                                $(this).find('.status').attr('class', 'status inactive')
+                            } else {
+                                $(this).find('.status').attr('class', 'status trip')
+                            }
+                        }
+                    }
+                    t = t + 1
+                }
+            })
+
+        })
+
+
+        $.post('/getData2', function (data) {
+            t = 0
+            $('.slider').each(function () {
+                if (data[t].status == 0)
+                    $(this).attr('value', '1')
+                if (data[t].status == 2)
+                    $(this).attr('value', '2')
+                if (data[t].status == 1)
+                    $(this).attr('value', '3')
+                i = 0
+                $('.range-img').each(function () {
+                    if (i == t) {
+                        if (data[t].status == 0)
+                            $(this).attr('src', './images/bulboff.png')
+                        if (data[t].status == 2)
+                            $(this).attr('src', './images/partial.jpg')
+                        if (data[t].status == 1)
+                            $(this).attr('src', './images/bulbon.png')
+                    }
+                    i = i + 1
+                })
+                //./images/bulboff.png
+                t = t + 1
+            })
+        })
+        getData3()
+
+    }, 5000)
     $('.configure').load('part3.html', function () {
 
 
