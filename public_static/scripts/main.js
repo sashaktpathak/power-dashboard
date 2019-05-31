@@ -131,6 +131,7 @@ $(document).ready(function () {
             $.post('/putData', { value: x, rowv: (y + 32) }, function (data) {
                 console.log(data)
                 getData3()
+                launch_toast()
             })
         })
     })
@@ -161,4 +162,10 @@ function getData3() {
             t = t + 1
         })
     })
+}
+
+function launch_toast() {
+    var x = document.getElementById("toast")
+    x.className = "show";
+    setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
 }
