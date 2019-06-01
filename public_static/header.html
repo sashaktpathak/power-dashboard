@@ -105,6 +105,54 @@
         -moz-appearance: none;
         -webkit-appearance: none;
     }
+
+    @media screen and (max-width: 1530px) {
+        .btngrps {
+            left: 27vw;
+        }
+
+        .dropdwn,
+        .dropdwn-svg {
+            left: 25vw;
+        }
+    }
+
+    @media screen and (max-width: 1250px) {
+        .btngrps {
+            left: 22vw;
+        }
+
+        .dropdwn,
+        .dropdwn-svg {
+            left: 20vw;
+        }
+    }
+
+    @media screen and (max-width: 1150px) {
+        .btngrps {
+            left: 15.5vw;
+        }
+
+        .dropdwn,
+        .dropdwn-svg {
+            left: 14vw;
+        }
+
+        .btngrps>span {
+            margin: 2px;
+            padding: 5px;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+
+        .dropdwn,
+        .dropdwn-svg,
+        .btngrps {
+            display: none;
+            visibility: hidden;
+        }
+    }
 </style>
 <script>
     $('.btn4').click(function () {

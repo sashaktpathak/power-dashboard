@@ -75,7 +75,7 @@ module.exports = function (app, passport) {
     app.post('/putData', function (req, res) {
         console.log([req.body.value, req.body.rowv])
         connection.query('USE ' + dbconfig.database)
-        connection.query('UPDATE tb_status SET status = ? WHERE chno = ?', [req.body.value, req.body.rowv], (err) => {
+        connection.query('UPDATE tb_status SET status = ? , timestamp = CURRENT_TIMESTAMP WHERE chno = ?', [req.body.value, req.body.rowv], (err) => {
 
             if (err) {
                 x = { status: 0 }

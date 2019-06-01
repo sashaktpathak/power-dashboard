@@ -1,5 +1,5 @@
-//$("#header").load("header.html")
-//$("#footer").load("footer.html")
+$("#header").load("header.html")
+$("#footer").load("footer.html")
 $('.phases').load('part1.html')
 
 $(document).ready(function () {
@@ -33,17 +33,18 @@ $(document).ready(function () {
 
 
         $('.btnb').click(function () {
-            x = $(this).html()
-            y = $(this).prev().parent().find('.id').html()
+            x = $(this).find('.light').html()
+            console.log(x)
+            y = $(this).prev().parent().find('.id_number').html()
             y = parseInt(y)
-            if (x == 'Pulse')
+            if (x == 'Trigger')
                 x = 1
-            else if (x == 'Low')
+            else if (x == 'ON')
                 x = 2
             else
                 x = 3
-            $.post('/putData', { value: x, rowv: (y + 32) }, function (data) {
-                //console.log(data)
+            $.post('/putData', { value: x, rowv: y }, function (data) {
+                console.log(data)
                 getData3()
                 launch_toast()
             })
@@ -52,8 +53,15 @@ $(document).ready(function () {
     $('.btn-addr').click(function () {
         x = $('#addr').val()
         $.post('/getResp', { value: x }, function (data) {
-            //console.log(data[0].response)
-            $('#resp_here').html(data[0].response)
+            //console.log(data)
+            if (data.length > 0) {
+                $('#resp_here').html(data[0].response)
+                $('#resp_here').attr('class', '')
+            }
+            else {
+                $('#resp_here').html("Address Not Found!")
+                $('#resp_here').attr('class', 'textarea-danger')
+            }
         })
     })
 
@@ -72,8 +80,15 @@ function getData3() {
                     $(this).attr('class', 'btnb btn bon')
                 if ($(this).html() == 'OFF')
                     $(this).attr('class', 'btnb btn boff')
+                if ($(this).html() == 'Trigger')
+                    $(this).attr('class', 'btnb btn btrigger')
+                $(this).find('.light').each(function () {
+                    $(this).attr('class', 'light lightoff')
+                })
                 if (i + 1 == data[t].status) {
-                    $(this).attr('class', 'btnb btn bactive')
+                    $(this).find('.light').each(function () {
+                        $(this).attr('class', 'light lighton')
+                    })
                 }
                 i = i + 1
             })
@@ -97,7 +112,8 @@ function refreshData() {
     $.post('/getData1', (data) => {
         var t = 0, i = 1
         $('#3phase_tb1 tr').each(function () {
-            if ($(this)[0].childNodes.length == 11 || $(this)[0].childNodes.length == 7) {
+            if ($(this)[0].childNodes.length == 13 || $(this)[0].childNodes.length == 9) {
+
                 if (data[t].status == 1) {
                     if ($(this).find('.phase_status').length) {
                         $(this).find('.phase_status').removeClass('phase_inactive')
@@ -118,13 +134,17 @@ function refreshData() {
                             $(this).find('.status').attr('class', 'status trip')
                         }
                     }
+                }
+                if ($(this).find('.labeldb').length) {
+                    $(this).find('.labeldb').html(data[t].label)
+                    //console.log($(this).find('.labeldb').html())
                 }
                 t = t + 1
             }
         })
 
         $('#3phase_tb2 tr').each(function () {
-            if ($(this)[0].childNodes.length == 11 || $(this)[0].childNodes.length == 7) {
+            if ($(this)[0].childNodes.length == 13 || $(this)[0].childNodes.length == 9) {
                 if (data[t].status == 1) {
                     if ($(this).find('.phase_status').length) {
                         $(this).find('.phase_status').removeClass('phase_inactive')
@@ -145,6 +165,10 @@ function refreshData() {
                             $(this).find('.status').attr('class', 'status trip')
                         }
                     }
+                }
+                if ($(this).find('.labeldb').length) {
+                    $(this).find('.labeldb').html(data[t].label)
+                    //console.log($(this).find('.labeldb').html())
                 }
                 t = t + 1
             }
@@ -182,3 +206,15 @@ function refreshData() {
 
 
 }
+
+function mediaquery(x) {
+    if (x.matches) {
+        $('.phase1_reshape1').attr('class', 'phase1_reshape1 col-sm-12')
+    } else {
+        $('.phase1_reshape1').attr('class', 'phase1_reshape1 col-sm-6')
+    }
+}
+
+var x = window.matchMedia("(max-width: 1300px)")
+mediaquery(x)
+x.addListener(mediaquery) 
