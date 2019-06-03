@@ -28,7 +28,8 @@ $(document).ready(function () {
     refreshData()
     setInterval(function () {
         refreshData()
-    }, 3000)
+        console.log("imhere--")
+    }, 30000)
     $('.configure').load('part3.html', function () {
 
 
@@ -108,6 +109,7 @@ function launch_toast() {
 
 
 function refreshData() {
+    getData3()
 
     $.post('/getData1', (data) => {
         var t = 0, i = 1
@@ -202,7 +204,6 @@ function refreshData() {
             t = t + 1
         })
     })
-    getData3()
 
 
 }
@@ -217,4 +218,10 @@ function mediaquery(x) {
 
 var x = window.matchMedia("(max-width: 1300px)")
 mediaquery(x)
-x.addListener(mediaquery) 
+x.addListener(mediaquery)
+
+var socket = io()
+socket.on('trydata', function (data) {
+    console.log(data)
+    refreshData();
+})

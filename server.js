@@ -4,11 +4,20 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var morgan = require('morgan')
 var app = express()
+var http = require('http').Server(app)
+var io = require('socket.io')(http)
 
 var port = process.env.PORT || 1337
 
 var passport = require('passport')
 var flash = require('connect-flash')
+var MySQLEvents = require('mysql-events');
+var dsn = {
+    host: 'localhost',
+    user: 'ecom',
+    password: 'password_123',
+};
+var mysqlEventWatcher = MySQLEvents(dsn);
 
 require('./config/passport')(passport);
 app.engine('html', require('ejs').renderFile);
@@ -30,7 +39,22 @@ app.use(express.static(__dirname + '/public_static'))
 
 app.set('view engine', 'ejs')
 
+io.on('connection', function (socket) {
+    var watcher = mysqlEventWatcher.add(
+        'try2.tb_status',
+        function (oldRow, newRow, event) {
+            console.log("Old Row: ", oldRow)
+            console.log("New Row: ", newRow)
+
+            if (newRow)
+                socket.emit('trydata', newRow.fields);
+        },
+        'match this string or regex'
+    );
+    console.log('User Active')
+});
+
 require('./app/routes.js')(app, passport)
 
-app.listen(port)
+http.listen(port)
 console.log('Port: ' + port)
