@@ -28,7 +28,7 @@ $(document).ready(function () {
     refreshData()
     setInterval(function () {
         refreshData()
-    }, 5000)
+    }, 3000)
     $('.configure').load('part3.html', function () {
 
 
