@@ -20,7 +20,7 @@ Login using
  
  To reflect immediate Change in Site when db is changed you need to enable Bin Logging in Mysql. 
 
-#Enabling Bin Logging
+# Enabling Bin Logging
 
 Open my.cnf/my.ini configuration file of Mysql
 
