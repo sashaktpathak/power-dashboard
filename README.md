@@ -29,7 +29,8 @@ On Linux System File will be located at
 `/etc/mysql`
 Add Following lines Under Title **[mysqld]**
 
-```server-id		= 1
+```
+server-id		= 1
 binlog_format    = row
 log_bin			= /var/log/mysql/mysql-bin.log
 ```
