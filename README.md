@@ -1,4 +1,4 @@
-# power-dashboard
+# Power-dashboard
 
 *Open database.js in Folder **config** and change username and password according to your machine*
 

@@ -193,6 +193,8 @@ function refreshData() {
                 $(this).attr('value', '2')
             if (data[t].status == 1)
                 $(this).attr('value', '3')
+            $(this).text($(this).val())
+            //console.log($(this).val())
             i = 0
             $('.range-img').each(function () {
                 if (i == t) {
