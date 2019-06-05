@@ -26,10 +26,11 @@ $(document).ready(function () {
         slider.disabled = true;
     })
     refreshData()
+    refreshData()
     setInterval(function () {
         refreshData()
-        console.log("imhere--")
-    }, 30000)
+        //console.log("imhere--")
+    }, 3000)
     $('.configure').load('part3.html', function () {
 
 
@@ -93,6 +94,10 @@ function getData3() {
                 }
                 i = i + 1
             })
+            if ($(this).find('.labeldb').length) {
+                $(this).find('.labeldb').html(data[t].label)
+                //console.log($(this).find('.labeldb').html())
+            }
             t = t + 1
         })
     })
@@ -203,6 +208,11 @@ function refreshData() {
             //./images/bulboff.png
             t = t + 1
         })
+        t = 0
+        $('.labeldb2').each(function () {
+            $(this).html(data[t].label)
+            t = t + 1
+        })
     })
 
 
@@ -224,4 +234,7 @@ var socket = io()
 socket.on('trydata', function (data) {
     console.log(data)
     refreshData();
+    setTimeout(() => {
+        refreshData()
+    }, 1000)
 })

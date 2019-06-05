@@ -45,8 +45,8 @@ hr
 }
 td
 {
-    padding-left: 10px !important;
-    padding-right: 10px;
+    padding-left: 4px !important;
+    padding-right: 4px;
 }
 
 .phase1
@@ -121,6 +121,7 @@ td
     -webkit-transition: .2s;
     transition: opacity .2s;
     margin-top: 23px;
+    margin-left: 12px;
   }
   
   .slider:hover {
@@ -354,7 +355,13 @@ td
       }
 
   }
-
+  @media screen and (max-width: 1000px)
+  {
+      td
+      {
+          padding: 0px;
+      }
+  }
 
   #toast {
     visibility: hidden;
