@@ -5,25 +5,25 @@ $('.phases').load('part1.html')
 $(document).ready(function () {
 
     $('.noncout').load('part2.html', function () {
-        var slider = document.getElementById("myRange1");
-        slider.oninput = function () {
-            output.innerHTML = this.value;
-        }
-        slider.disabled = true;
-        slider = document.getElementById("myRange2");
-        slider.disabled = true;
-        slider = document.getElementById("myRange3");
-        slider.disabled = true;
-        slider = document.getElementById("myRange4");
-        slider.disabled = true;
-        slider = document.getElementById("myRange5");
-        slider.disabled = true;
-        slider = document.getElementById("myRange6");
-        slider.disabled = true;
-        slider = document.getElementById("myRange7");
-        slider.disabled = true;
-        slider = document.getElementById("myRange8");
-        slider.disabled = true;
+        // var slider = document.getElementById("myRange1");
+        // slider.oninput = function () {
+        //     output.innerHTML = this.value;
+        // }
+        // slider.disabled = true;
+        // slider = document.getElementById("myRange2");
+        // slider.disabled = true;
+        // slider = document.getElementById("myRange3");
+        // slider.disabled = true;
+        // slider = document.getElementById("myRange4");
+        // slider.disabled = true;
+        // slider = document.getElementById("myRange5");
+        // slider.disabled = true;
+        // slider = document.getElementById("myRange6");
+        // slider.disabled = true;
+        // slider = document.getElementById("myRange7");
+        // slider.disabled = true;
+        // slider = document.getElementById("myRange8");
+        // slider.disabled = true;
     })
     refreshData()
     refreshData()
@@ -217,14 +217,59 @@ function refreshData() {
         })
     })
 
+    $.post('/getData2', function (data) {
+        t = 0
+        $('.slider1').each(function () {
+            if (data[t].status == 0)
+                $(this).attr('value', '1')
+            if (data[t].status == 2)
+                $(this).attr('value', '2')
+            if (data[t].status == 1)
+                $(this).attr('value', '3')
+            $(this).text($(this).val())
+            //console.log($(this).val())
+            i = 0
+            $('.range-img1').each(function () {
+                if (i == t) {
+                    if (data[t].status == 0)
+                        $(this).attr('src', './images/bulboff.png')
+                    if (data[t].status == 2)
+                        $(this).attr('src', './images/partial.jpg')
+                    if (data[t].status == 1)
+                        $(this).attr('src', './images/bulbon.png')
+                }
+                i = i + 1
+            })
+            //./images/bulboff.png
+            t = t + 1
+        })
+        t = 0
+        $('.labeldb21').each(function () {
+            $(this).html(data[t].label)
+            t = t + 1
+        })
+    })
 
 }
 
 function mediaquery(x) {
     if (x.matches) {
         $('.phase1_reshape1').attr('class', 'phase1_reshape1 col-sm-12')
+        $('#tb_voltage').css('display', 'none')
+        $('#tb_voltage').css('visibility', 'hidden')
+        $('.tb_voltage_small_1').css('display', 'block')
+        $('.tb_voltage_small_2').css('display', 'block')
+        $('.tb_voltage_small_1').css('visibility', 'visible')
+        $('.tb_voltage_small_2').css('visibility', 'visible')
     } else {
         $('.phase1_reshape1').attr('class', 'phase1_reshape1 col-sm-6')
+        console.log("f")
+        $('#tb_voltage').css('display', 'block')
+        $('#tb_voltage').css('visibility', 'visible')
+        $('.tb_voltage_small_1').css('display', 'none')
+        $('.tb_voltage_small_2').css('display', 'none')
+        $('.tb_voltage_small_1').css('visibility', 'hidden')
+        $('.tb_voltage_small_2').css('visibility', 'hidden')
     }
 }
 
@@ -240,3 +285,12 @@ socket.on('trydata', function (data) {
         refreshData()
     }, 1000)
 })
+
+$('#tb_voltage').css('display', 'block')
+$('#tb_voltage').css('visibility', 'visible')
+$('.tb_voltage_small_1').css('display', 'none')
+$('.tb_voltage_small_2').css('display', 'none')
+$('.tb_voltage_small_1').css('visibility', 'hidden')
+$('.tb_voltage_small_2').css('visibility', 'hidden')
+$('.tb_voltage_small_1').css('background', 'black')
+$('.tb_voltage_small_2').css('background', 'black')
