@@ -5,25 +5,25 @@ $('.phases').load('part1.html')
 $(document).ready(function () {
 
     $('.noncout').load('part2.html', function () {
-        // var slider = document.getElementById("myRange1");
-        // slider.oninput = function () {
-        //     output.innerHTML = this.value;
-        // }
-        // slider.disabled = true;
-        // slider = document.getElementById("myRange2");
-        // slider.disabled = true;
-        // slider = document.getElementById("myRange3");
-        // slider.disabled = true;
-        // slider = document.getElementById("myRange4");
-        // slider.disabled = true;
-        // slider = document.getElementById("myRange5");
-        // slider.disabled = true;
-        // slider = document.getElementById("myRange6");
-        // slider.disabled = true;
-        // slider = document.getElementById("myRange7");
-        // slider.disabled = true;
-        // slider = document.getElementById("myRange8");
-        // slider.disabled = true;
+        var slider = document.getElementById("myRange1");
+        slider.oninput = function () {
+            output.innerHTML = this.value;
+        }
+        slider.disabled = true;
+        slider = document.getElementById("myRange2");
+        slider.disabled = true;
+        slider = document.getElementById("myRange3");
+        slider.disabled = true;
+        slider = document.getElementById("myRange4");
+        slider.disabled = true;
+        slider = document.getElementById("myRange5");
+        slider.disabled = true;
+        slider = document.getElementById("myRange6");
+        slider.disabled = true;
+        slider = document.getElementById("myRange7");
+        slider.disabled = true;
+        slider = document.getElementById("myRange8");
+        slider.disabled = true;
     })
     refreshData()
     refreshData()
