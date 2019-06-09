@@ -1,7 +1,7 @@
 $("#header").load("header.html")
 $("#footer").load("footer.html")
 $('.phases').load('part1.html')
-
+var btnpress_turn = 0;
 $(document).ready(function () {
 
     $('.noncout').load('part2.html', function () {
@@ -294,3 +294,25 @@ $('.tb_voltage_small_1').css('visibility', 'hidden')
 $('.tb_voltage_small_2').css('visibility', 'hidden')
 $('.tb_voltage_small_1').css('background', 'black')
 $('.tb_voltage_small_2').css('background', 'black')
+
+$('.btnpress_toggle').click(function () {
+    increasebtnpress()
+})
+
+function increasebtnpress() {
+    console.log("ssd")
+    btnpress_turn += 1
+    console.log("pressed: " + btnpress_turn)
+}
+
+function setvisibility() {
+    if (btnpress_turn % 2 == 0) {
+        $('.btngrps').css('display', 'none')
+    }
+    else {
+        $('.btngrps').css('display', 'block')
+    }
+}
+setInterval(() => {
+    setvisibility()
+}, 500);
