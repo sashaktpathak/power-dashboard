@@ -66,7 +66,10 @@ $(document).ready(function () {
             }
         })
     })
-
+    $('.dropdwn').change(function () {
+        console.log("d")
+        $('.location-text').html($('.dropdwn').val().toUpperCase())
+    })
 
 })
 
@@ -187,12 +190,18 @@ function refreshData() {
     $.post('/getData2', function (data) {
         t = 0
         $('.slider').each(function () {
-            if (data[t].status == 0)
+            if (data[t].status == 0) {
                 $(this).attr('value', '1')
-            if (data[t].status == 2)
+                $(this).attr('class', 'slider slider_black')
+            }
+            if (data[t].status == 2) {
                 $(this).attr('value', '2')
-            if (data[t].status == 1)
+                $(this).attr('class', 'slider slider_partial')
+            }
+            if (data[t].status == 1) {
                 $(this).attr('value', '3')
+                $(this).attr('class', 'slider slider_green')
+            }
             $(this).text($(this).val())
             //console.log($(this).val())
             i = 0
@@ -216,16 +225,22 @@ function refreshData() {
             t = t + 1
         })
     })
-
+    var cur_timestamp;
     $.post('/getData2', function (data) {
         t = 0
         $('.slider1').each(function () {
-            if (data[t].status == 0)
+            if (data[t].status == 0) {
                 $(this).attr('value', '1')
-            if (data[t].status == 2)
+                $(this).attr('class', 'slider1 slider_black')
+            }
+            if (data[t].status == 2) {
                 $(this).attr('value', '2')
-            if (data[t].status == 1)
+                $(this).attr('class', 'slider1 slider_partial')
+            }
+            if (data[t].status == 1) {
                 $(this).attr('value', '3')
+                $(this).attr('class', 'slider1 slider_green')
+            }
             $(this).text($(this).val())
             //console.log($(this).val())
             i = 0
@@ -240,7 +255,6 @@ function refreshData() {
                 }
                 i = i + 1
             })
-            //./images/bulboff.png
             t = t + 1
         })
         t = 0
@@ -249,11 +263,16 @@ function refreshData() {
             t = t + 1
         })
     })
-
+    var today = new Date()
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    //console.log(toString(today))
+    $('.refresh-text1').html(date)
+    $('.refresh-text2').html(time)
 }
 
 function mediaquery(x) {
-    if (x.matches) {
+    if (x.matches || window.innerWidth <= 1300) {
         $('.phase1_reshape1').attr('class', 'phase1_reshape1 col-sm-12')
         $('#tb_voltage').css('display', 'none')
         $('#tb_voltage').css('visibility', 'hidden')
@@ -263,13 +282,13 @@ function mediaquery(x) {
         $('.tb_voltage_small_2').css('visibility', 'visible')
     } else {
         $('.phase1_reshape1').attr('class', 'phase1_reshape1 col-sm-6')
-        console.log("f")
         $('#tb_voltage').css('display', 'block')
         $('#tb_voltage').css('visibility', 'visible')
         $('.tb_voltage_small_1').css('display', 'none')
         $('.tb_voltage_small_2').css('display', 'none')
         $('.tb_voltage_small_1').css('visibility', 'hidden')
         $('.tb_voltage_small_2').css('visibility', 'hidden')
+
     }
 }
 
@@ -316,3 +335,6 @@ function setvisibility() {
 setInterval(() => {
     setvisibility()
 }, 500);
+
+document.getElementsByClassName('bg-cnf_det')[0].offsetWidth = document.getElementsByClassName('bg-address')[0].offsetWidth;
+console.log(document.getElementsByClassName('bg-address')[0].offsetWidth)

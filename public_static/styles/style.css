@@ -17,11 +17,16 @@ th
 {
     padding: 5px;
 }
+.phase1_reshape1
+{
+    margin-top: 10px;
+}
 .status
 {
     width: 50px;
     height: 50px;
     margin: 0 auto;
+    margin-left: -5px;
 }
 .active
 {
@@ -110,18 +115,29 @@ td
     width: 100%;
   }
   
+  .slider_green
+  {
+      background: #51ff00;
+  }
+  .slider_black
+  {
+      background: #111;
+  }
+  .slider_partial
+  {
+    background-image: linear-gradient(0deg, black, rgb(130, 255, 130));
+}
   .slider, .slider1 {
     -webkit-appearance: none;
     width: 200px !important;
     height: 22px;
     border-radius: 5px;
-    background-image: linear-gradient(360deg, black, red);
     outline: none;
     opacity: 0.8;
     -webkit-transition: .2s;
     transition: opacity .2s;
     margin-top: 100px;
-    margin-left: -100px;
+    margin-left: -90px;
     -webkit-transform:rotate(270deg);
     -moz-transform:rotate(270deg);
     -o-transform:rotate(270deg);
@@ -262,15 +278,17 @@ td
   .range-img, .range-img1
   {
       border-radius: 50%;
+      margin-left: -20px;
   }
   .bg-phases
   {
       background: white;
       padding: 15px;
       transition: all 0.6s;
-      margin: 25px;
-      left: 15px;
+      margin: 10px;
+      left: 55px;
       box-shadow: 1px 1px 1px 1px #666;
+      padding-bottom: 70px;
   }
   .bg-voltage
   {
@@ -280,19 +298,19 @@ td
       justify-content: center;
       align-items: center;
       transition: all 0.6s;
-      margin: 25px;
+      margin: 10px;
       box-shadow: 1px 1px 1px 1px #666;
-      left: 15px;
+      left: 55px;
   }
   .bg-configure
   {
       background: white;
       padding: 15px;
       transition: all 0.6s;
-      margin: 25px;
+      margin: 10px;
       padding-bottom: 100px;
       box-shadow: 1px 1px 1px 1px #666;
-      right: -25px;
+      padding-right: 150px;
   }
   .bg-address
   {
@@ -300,10 +318,57 @@ td
       padding: 15px;
       transition: all 0.6s;
       box-shadow: 1px 1px 1px 1px #666;
-      padding-bottom: 200px;
-      margin: 15px;
-      right: -25px;
-      margin-top: -150px;
+      padding-bottom: 37px;
+      margin: 10px;
+      margin-left: 20px;
+      left: 55px;
+  }
+  .bg-details
+  {
+    background: white;
+    padding: 15px;
+    transition: all 0.6s;
+    margin: 10px;
+    box-shadow: 1px 1px 1px 1px #666;
+    font-size: 2em;
+    font-weight: bolder;
+    color: black;
+  }
+  .bg-cnf_det
+  {
+      width: 44%;
+  }
+  .location-text, .refresh-text1, .refresh-text2
+  {
+      color: black;
+      font-size: 0.7em;
+      display: inline-block;
+      border: 2px dotted green; 
+      padding: 5px;
+      border-radius: 10px;
+  }
+  .location-text
+  {
+      margin-left: 150px;
+      padding-right: 150px;
+  }
+  .refresh-text1, .refresh-text2
+  {
+      margin-left: 220px;
+      padding-right: 140px;
+  }
+  .refresh-text1
+  {
+      margin-left: 225px;
+    padding-right: 120px; 
+  }
+  .details-title1, .details-title2
+  {
+      font-size: 0.85em;
+  }
+  .tag-line
+  {
+      font-weight: 500;
   }
   /* .bg-phases:hover , .bg-configure:hover , .bg-voltage:hover
   {
@@ -312,6 +377,15 @@ td
       transition: all 0.6s;
       z-index: 100;
   } */
+
+  .form-group
+  {
+      margin-top: 20px;
+  }
+  .response_label, .addr_label
+      {
+          font-size: 1.2em;
+      }
   @media screen and (max-width: 1800px) and (min-width: 1550px)
   {
       .bg-voltage
@@ -323,12 +397,16 @@ td
   }
   @media screen and (max-width: 1300px)
   {
-      .bg-address, .bg-configure, .bg-phases ,.bg-voltage
+      .bg-address, .bg-configure, .bg-phases ,.bg-voltage, .bg-cnf_det
       {
           margin: 0px;
           margin-top: 10px;
-        left: 0px;
+        left: 0px !important;
         right: 0px;
+      }
+      .bg-cnf_det
+      {
+          width: 100%;
       }
   }
   @media screen and (max-width: 1700px) and (min-width: 1300px)
@@ -382,12 +460,28 @@ td
       {
           margin-left: 2px;
       }
+      .slider1
+      {
+          margin: 0px !important;
+      }
+      .range-img1
+      {
+          margin-left: 70px !important;
+      }
+      .tb_voltage_small_1 .id, .tb_voltage_small_1 .labeldb21, .tb_voltage_small_2 .id, .tb_voltage_small_2 .labeldb21
+      {
+          padding-left: 50px !important;
+      }
   }
   @media screen and (max-width: 1000px)
   {
       td
       {
           padding: 0px;
+      }
+      .response_label, .addr_label
+      {
+          margin-left: 15px;
       }
   }
 
@@ -440,7 +534,10 @@ td
     -webkit-animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
 }
-
+#tb_configure
+{
+    margin-top: 10px;
+}
 @-webkit-keyframes fadein {
     from {bottom: 0; opacity: 0;} 
     to {bottom: 30px; opacity: 1;}
