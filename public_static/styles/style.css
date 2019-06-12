@@ -389,6 +389,23 @@ td
       {
           font-size: 1.55em;
       }
+      .addr_label:nth-child(1)
+      {
+          padding-right: 217px; 
+      }
+      .addr_label:nth-child(2)
+      {
+          padding-right: 150px;
+      }
+      .addr_label:nth-child(3)
+      {
+        padding-right: 0px; 
+      }
+      #id_addr, #addr, #length_addr
+      {
+          display: inline-block;
+          width: 31%;
+      }
   @media screen and (max-width: 1800px) and (min-width: 1550px)
   {
       .bg-voltage
