@@ -16,6 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `locations`
+--
+
+DROP TABLE IF EXISTS `locations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `locations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `location` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `locations`
+--
+
+LOCK TABLES `locations` WRITE;
+/*!40000 ALTER TABLE `locations` DISABLE KEYS */;
+INSERT INTO `locations` VALUES (1,'DELHI'),(2,'GURUGRAM'),(3,'BANGLORE');
+/*!40000 ALTER TABLE `locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_address`
 --
 
@@ -27,6 +51,8 @@ CREATE TABLE `tb_address` (
   `address` text,
   `response` text,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `id_addr` int(11) DEFAULT NULL,
+  `length` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -37,7 +63,7 @@ CREATE TABLE `tb_address` (
 
 LOCK TABLES `tb_address` WRITE;
 /*!40000 ALTER TABLE `tb_address` DISABLE KEYS */;
-INSERT INTO `tb_address` VALUES (1,'A1234','Lorem ipsum dolor sit amet','2019-05-28 18:22:04'),(2,'12XC34','Lorem dolor sit amet','2019-05-28 18:22:20'),(3,'8080','recteque contentiones his ut','2019-05-28 18:22:57'),(4,'1111','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at velit sit amet sem laoreet efficitur non in urna. Fusce fringilla ipsum massa, ac tristique arcu varius eget. Maecenas vestibulum tristique nisi id fringilla. In elit odio, consectetur eget condimentum ut, egestas in nisi. Pellentesque aliquam nulla ac ex rutrum, et ullamcorper nulla aliquam. Aenean ac nulla ut velit vehicula lacinia sed eu odio. Donec egestas arcu tortor, ac euismod justo fermentum vitae. Morbi placerat ante vel efficitur tempus. Duis mollis feugiat finibus. Pellentesque varius et sapien laoreet varius. Donec eget neque elementum, euismod sem eu, vehicula felis. Nulla facilisi. Phasellus id turpis vitae diam pharetra efficitur. Morbi nunc urna, lacinia non dolor nec, pharetra sagittis enim. ','2019-06-01 09:03:07');
+INSERT INTO `tb_address` VALUES (1,'A1234','Lorem ipsum dolor sit amet','2019-05-28 18:22:04',NULL,NULL),(2,'12XC34','Lorem dolor sit amet','2019-05-28 18:22:20',NULL,NULL),(3,'8080','recteque contentiones his ut','2019-05-28 18:22:57',NULL,NULL),(4,'1111','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc at velit sit amet sem laoreet efficitur non in urna. Fusce fringilla ipsum massa, ac tristique arcu varius eget. Maecenas vestibulum tristique nisi id fringilla. In elit odio, consectetur eget condimentum ut, egestas in nisi. Pellentesque aliquam nulla ac ex rutrum, et ullamcorper nulla aliquam. Aenean ac nulla ut velit vehicula lacinia sed eu odio. Donec egestas arcu tortor, ac euismod justo fermentum vitae. Morbi placerat ante vel efficitur tempus. Duis mollis feugiat finibus. Pellentesque varius et sapien laoreet varius. Donec eget neque elementum, euismod sem eu, vehicula felis. Nulla facilisi. Phasellus id turpis vitae diam pharetra efficitur. Morbi nunc urna, lacinia non dolor nec, pharetra sagittis enim. ','2019-06-01 09:03:07',NULL,NULL);
 /*!40000 ALTER TABLE `tb_address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,6 +79,7 @@ CREATE TABLE `tb_status` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` int(11) DEFAULT NULL,
   `label` varchar(14) DEFAULT 'ABCDEFGHIJKL',
+  `location` int(11) DEFAULT '1',
   PRIMARY KEY (`chno`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -63,7 +90,7 @@ CREATE TABLE `tb_status` (
 
 LOCK TABLES `tb_status` WRITE;
 /*!40000 ALTER TABLE `tb_status` DISABLE KEYS */;
-INSERT INTO `tb_status` VALUES (1,'2019-05-28 18:11:14',0,'ABCDEFGHIJKL'),(2,'2019-05-28 18:11:48',0,'ABCDEFGHIJKL'),(3,'2019-05-28 18:11:48',1,'ABCDEFGHIJKL'),(4,'2019-05-28 18:11:48',1,'ABCDEFGHIJKL'),(5,'2019-05-28 18:11:48',1,'ABCDEFGHIJKL'),(6,'2019-05-28 18:11:48',1,'ABCDEFGHIJKL'),(7,'2019-05-28 18:12:27',0,'ABCDEFGHIJKL'),(8,'2019-05-28 18:12:27',1,'ABCDEFGHIJKL'),(9,'2019-05-28 18:12:27',1,'ABCDEFGHIJKL'),(10,'2019-05-28 18:12:27',1,'ABCDEFGHIJKL'),(11,'2019-05-28 18:12:27',1,'ABCDEFGHIJKL'),(12,'2019-05-28 18:12:55',1,'ABCDEFGHIJKL'),(13,'2019-05-28 18:12:55',0,'ABCDEFGHIJKL'),(14,'2019-05-28 18:12:55',0,'ABCDEFGHIJKL'),(15,'2019-05-28 18:12:55',0,'ABCDEFGHIJKL'),(16,'2019-05-28 18:12:55',0,'ABCDEFGHIJKL'),(17,'2019-05-28 18:13:26',1,'ABCDEFGHIJKL'),(18,'2019-05-28 18:13:26',1,'ABCDEFGHIJKL'),(19,'2019-05-28 18:13:26',0,'ABCDEFGHIJKL'),(20,'2019-05-28 18:13:26',0,'ABCDEFGHIJKL'),(21,'2019-05-28 18:13:26',1,'ABCDEFGHIJKL'),(22,'2019-05-28 18:13:49',1,'ABCDEFGHIJKL'),(23,'2019-05-28 18:13:49',1,'ABCDEFGHIJKL'),(24,'2019-05-28 18:13:49',1,'ABCDEFGHIJKL'),(25,'2019-05-28 18:15:06',2,'XYZASASXSASAS'),(26,'2019-05-28 18:15:06',1,'ABCDEFGHIJKL'),(27,'2019-05-28 18:15:06',0,'ABCDEFGHIJKL'),(28,'2019-05-28 18:15:06',0,'ABCDEFGHIJKL'),(29,'2019-05-28 18:15:06',2,'ABCDEFGHIJKL'),(30,'2019-05-28 18:15:34',1,'ABCDEFGHIJKL'),(31,'2019-05-28 18:15:34',2,'ABCDEFGHIJKL'),(32,'2019-05-28 18:15:34',1,'ABCDEFGHIJKL'),(33,'2019-06-05 08:52:55',2,'ABCDEFGHIJKL'),(34,'2019-06-01 09:10:59',1,'ABCDEFGHIJKL'),(35,'2019-06-02 09:45:39',1,'XYZASASXSASAS'),(36,'2019-05-28 18:16:33',3,'ABCDEFGHIJKL');
+INSERT INTO `tb_status` VALUES (1,'2019-05-28 18:11:14',0,'ABCDEFGHIJKL',1),(2,'2019-05-28 18:11:48',0,'ABCDEFGHIJKL',1),(3,'2019-05-28 18:11:48',1,'ABCDEFGHIJKL',1),(4,'2019-05-28 18:11:48',1,'ABCDEFGHIJKL',1),(5,'2019-05-28 18:11:48',1,'ABCDEFGHIJKL',1),(6,'2019-05-28 18:11:48',1,'ABCDEFGHIJKL',1),(7,'2019-05-28 18:12:27',1,'jhhjbkjnkl',1),(8,'2019-05-28 18:12:27',1,'ABCDEFGHIJKL',1),(9,'2019-05-28 18:12:27',1,'ABCDEFGHIJKL',1),(10,'2019-05-28 18:12:27',1,'ABCDEFGHIJKL',1),(11,'2019-05-28 18:12:27',1,'ABCDEFGHIJKL',1),(12,'2019-05-28 18:12:55',1,'ABCDEFGHIJKL',1),(13,'2019-05-28 18:12:55',0,'ABCDEFGHIJKL',1),(14,'2019-05-28 18:12:55',0,'ABCDEFGHIJKL',1),(15,'2019-05-28 18:12:55',0,'ABCDEFGHIJKL',1),(16,'2019-05-28 18:12:55',0,'ABCDEFGHIJKL',1),(17,'2019-05-28 18:13:26',1,'ABCDEFGHIJKL',1),(18,'2019-05-28 18:13:26',1,'ABCDEFGHIJKL',1),(19,'2019-05-28 18:13:26',0,'ABCDEFGHIJKL',1),(20,'2019-05-28 18:13:26',0,'ABCDEFGHIJKL',1),(21,'2019-05-28 18:13:26',1,'ABCDEFGHIJKL',1),(22,'2019-05-28 18:13:49',1,'ABCDEFGHIJKL',1),(23,'2019-05-28 18:13:49',1,'ABCDEFGHIJKL',1),(24,'2019-05-28 18:13:49',1,'ABCDEFGHIJKL',1),(25,'2019-05-28 18:15:06',0,'XYZASASXSASAS',1),(26,'2019-05-28 18:15:06',1,'ABCDEFGHIJKL',1),(27,'2019-05-28 18:15:06',0,'ABCDEFGHIJKL',1),(28,'2019-05-28 18:15:06',0,'ABCDEFGHIJKL',1),(29,'2019-05-28 18:15:06',2,'ABCDEFGHIJKL',1),(30,'2019-05-28 18:15:34',1,'ABCDEFGHIJKL',1),(31,'2019-05-28 18:15:34',2,'ABCDEFGHIJKL',1),(32,'2019-05-28 18:15:34',1,'ABCDEFGHIJKL',1),(33,'2019-06-11 06:24:01',3,'ABCDEFGHIJKL',1),(34,'2019-06-01 09:10:59',1,'ABCDEFGHIJKL',1),(35,'2019-06-02 09:45:39',1,'XYZASASXSASAS',1),(36,'2019-06-12 08:45:07',2,'ABCDEFGHIJKL',1);
 /*!40000 ALTER TABLE `tb_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-06  0:24:31
+-- Dump completed on 2019-06-13  0:00:51

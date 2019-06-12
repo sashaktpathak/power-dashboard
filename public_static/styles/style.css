@@ -398,7 +398,7 @@ td
           padding-right: 150px;
       }
       .addr_label:nth-child(3)
-      {
+      { 
         padding-right: 0px; 
       }
       #id_addr, #addr, #length_addr
@@ -507,8 +507,51 @@ td
       {
         padding-left: 20px;
       }
+      .addr_label:nth-child(1)
+      {
+          padding-right: 25.5%; 
+      }
+      .addr_label:nth-child(2)
+      {
+          padding-right: 20%;
+      }
+      .addr_label:nth-child(3)
+      { 
+        padding-right: 0px; 
+      }
   }
+  @media screen and (max-width: 800px)
+  {
+      .addr_label
+      {
+          font-size: 1.1em;
+      }
 
+      .addr_label:nth-child(1)
+      {
+          padding-right: 25.5%; 
+      }
+      .addr_label:nth-child(2)
+      {
+          padding-right: 20%;
+      }
+  }
+  @media screen and (max-width: 500px)
+  {
+      .addr_label
+      {
+          font-size: 1.1em;
+      }
+
+      .addr_label:nth-child(1)
+      {
+          padding-right: 21.5%; 
+      }
+      .addr_label:nth-child(2)
+      {
+          padding-right: 15%;
+      }
+  }
   #toast {
     visibility: hidden;
     max-width: 50px;
