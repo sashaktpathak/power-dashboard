@@ -24,6 +24,33 @@ $(document).ready(function () {
         slider.disabled = true;
         slider = document.getElementById("myRange8");
         slider.disabled = true;
+        slider = document.getElementById("myRange21");
+        slider.disabled = true;
+        slider = document.getElementById("myRange22");
+        slider.disabled = true;
+        slider = document.getElementById("myRange23");
+        slider.disabled = true;
+        slider = document.getElementById("myRange24");
+        slider.disabled = true;
+        slider = document.getElementById("myRange25");
+        slider.disabled = true;
+        slider = document.getElementById("myRange26");
+        slider.disabled = true;
+        slider = document.getElementById("myRange27");
+        slider.disabled = true;
+        slider = document.getElementById("myRange28");
+        slider.disabled = true;
+
+        if (window.innerWidth <= 1300) {
+            $('.phase1_reshape1').attr('class', 'phase1_reshape1 col-sm-12')
+            $('#tb_voltage').css('display', 'none')
+            $('#tb_voltage').css('visibility', 'hidden')
+            $('.tb_voltage_small_1').css('display', 'block')
+            $('.tb_voltage_small_2').css('display', 'block')
+            $('.tb_voltage_small_1').css('visibility', 'visible')
+            $('.tb_voltage_small_2').css('visibility', 'visible')
+        }
+
     })
     refreshData()
     refreshData()
@@ -66,10 +93,42 @@ $(document).ready(function () {
             }
         })
     })
-    $('.dropdwn').change(function () {
-        console.log("d")
-        $('.location-text').html($('.dropdwn').val().toUpperCase())
+
+    $.get('/getLocations', function (data) {
+        for (t = 0; t < data.length; t++) {
+            $('.drpmn').append("<li class='drpmnli'>" + data[t].location + "</li>")
+        }
+        $('.location-text').html(data[0].location)
+        $('.drpmnli').click(function () {
+            $('.location-text').html($(this).text().toUpperCase())
+        })
     })
+
+    function mediaquery(x) {
+        if (x.matches || window.innerWidth <= 1300) {
+            $('.phase1_reshape1').attr('class', 'phase1_reshape1 col-sm-12')
+            $('#tb_voltage').css('display', 'none')
+            $('#tb_voltage').css('visibility', 'hidden')
+            $('.tb_voltage_small_1').css('display', 'block')
+            $('.tb_voltage_small_2').css('display', 'block')
+            $('.tb_voltage_small_1').css('visibility', 'visible')
+            $('.tb_voltage_small_2').css('visibility', 'visible')
+        } else {
+            $('.phase1_reshape1').attr('class', 'phase1_reshape1 col-sm-6')
+            $('#tb_voltage').css('display', 'block')
+            $('#tb_voltage').css('visibility', 'visible')
+            $('.tb_voltage_small_1').css('display', 'none')
+            $('.tb_voltage_small_2').css('display', 'none')
+            $('.tb_voltage_small_1').css('visibility', 'hidden')
+            $('.tb_voltage_small_2').css('visibility', 'hidden')
+
+        }
+    }
+
+    var x = window.matchMedia("(max-width: 1300px)")
+    mediaquery(x)
+    x.addListener(mediaquery)
+
 
 })
 
@@ -271,30 +330,6 @@ function refreshData() {
     $('.refresh-text2').html(time)
 }
 
-function mediaquery(x) {
-    if (x.matches || window.innerWidth <= 1300) {
-        $('.phase1_reshape1').attr('class', 'phase1_reshape1 col-sm-12')
-        $('#tb_voltage').css('display', 'none')
-        $('#tb_voltage').css('visibility', 'hidden')
-        $('.tb_voltage_small_1').css('display', 'block')
-        $('.tb_voltage_small_2').css('display', 'block')
-        $('.tb_voltage_small_1').css('visibility', 'visible')
-        $('.tb_voltage_small_2').css('visibility', 'visible')
-    } else {
-        $('.phase1_reshape1').attr('class', 'phase1_reshape1 col-sm-6')
-        $('#tb_voltage').css('display', 'block')
-        $('#tb_voltage').css('visibility', 'visible')
-        $('.tb_voltage_small_1').css('display', 'none')
-        $('.tb_voltage_small_2').css('display', 'none')
-        $('.tb_voltage_small_1').css('visibility', 'hidden')
-        $('.tb_voltage_small_2').css('visibility', 'hidden')
-
-    }
-}
-
-var x = window.matchMedia("(max-width: 1300px)")
-mediaquery(x)
-x.addListener(mediaquery)
 
 var socket = io()
 socket.on('trydata', function (data) {

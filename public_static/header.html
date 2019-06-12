@@ -15,15 +15,17 @@
                     Maintenance Dashboard</span>
             </div>
 
-            <select class="dropdwn" style="display: inline-block;">
-                <option value="loc1">LOC 1</option>
-                <option value="loc2">LOC 2</option>
-                <option value="loc3">LOC 3</option>
-                <option value="audi" selected disabled>Location</option>
-            </select>
-            <div class="dropdwn-svg"><img src="./images/drop-down-arrow.svg" width="20" height="25"></div>
+
             <div class="btngrps navbar-collapse collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <li>
+                        <span>
+                            <button class=" dropdwn dropdown-toggle" type="button" data-toggle="dropdown">Location
+                                <span class="caret"></span></button>
+                            <ul class="dropdown-menu drpmn">
+                            </ul>
+                        </span>
+                    </li>
                     <li><span class="btn2">Generate CSV</span></li>
                     <li><span class="btn4">Logout</span></li>
                 </ul>
@@ -52,21 +54,15 @@
 
     .dropdwn {
         background-color: #3F51B5;
-        text-decoration: underline;
         color: white;
         border: none;
-        font-size: 1.4em;
         font-family: 'Alegreya Sans SC';
-        left: 38vw;
-        top: 10px;
         position: relative;
         cursor: pointer;
     }
 
     .dropdwn-svg {
         display: inline-block;
-        left: 38vw;
-        top: 10px;
         position: relative;
     }
 
@@ -95,6 +91,12 @@
         cursor: pointer;
     }
 
+    .btngrps>ul>li:hover .dropdwn {
+        text-decoration: underline;
+        transition: all 0.5s;
+        cursor: pointer;
+    }
+
     select::-ms-expand {
         display: none;
     }
@@ -110,10 +112,6 @@
             left: 60vw;
         }
 
-        .dropdwn,
-        .dropdwn-svg {
-            left: 25vw;
-        }
     }
 
     @media screen and (max-width: 1250px) {
@@ -121,10 +119,6 @@
             left: 60vw;
         }
 
-        .dropdwn,
-        .dropdwn-svg {
-            left: 20vw;
-        }
     }
 
     @media screen and (max-width: 1150px) {
@@ -132,10 +126,6 @@
             left: 57vw;
         }
 
-        .dropdwn,
-        .dropdwn-svg {
-            left: 14vw;
-        }
 
         .btngrps>ul>li>span {
             margin: 2px;
@@ -145,15 +135,12 @@
 
     @media screen and (max-width: 900px) {
 
-        .dropdwn,
-        .dropdwn-svg {
-            display: none;
-            visibility: hidden;
-            left: 0px;
-        }
-
         .btngrps>ul>li {
             margin: 10px;
+        }
+
+        .btngrps {
+            left: 45vw;
         }
     }
 </style>

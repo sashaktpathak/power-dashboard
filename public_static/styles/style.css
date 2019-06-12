@@ -203,10 +203,6 @@ td
   {
       background-color: rgba(250,250,250,0.3);
   }
-  .btn
-  {
-      margin: 10px;
-  }
   .bon
   {
       background: rgba(209, 18, 18, 0.5);
@@ -222,6 +218,16 @@ td
       transform: scale(1.1);
       transition:all 0.5s ;
       box-shadow: 5px 5px #ddd;
+  }
+  .drpmn
+  {
+      color: black; 
+      padding-left: 10px;
+      font-size: 15px;
+  }
+  .drpmn>li:hover
+  {
+    text-decoration: underline;
   }
   .btnb:active
   {
@@ -256,14 +262,7 @@ td
     margin: 5px;
     height: 50px;
   }
-  .title1 > h3 
-  {
-      font-size: 1.6em;
-  }
-  .title2 > h3, .title3>h3
-  {
-    font-size: 1.6em;
-}
+  
   .title3
   {
       background: rgba(250, 69, 23, 0.5);
@@ -310,7 +309,7 @@ td
       margin: 10px;
       padding-bottom: 100px;
       box-shadow: 1px 1px 1px 1px #666;
-      padding-right: 150px;
+      
   }
   .bg-address
   {
@@ -318,9 +317,8 @@ td
       padding: 15px;
       transition: all 0.6s;
       box-shadow: 1px 1px 1px 1px #666;
-      padding-bottom: 37px;
+      padding-bottom: 42px;
       margin: 10px;
-      margin-left: 20px;
       left: 55px;
   }
   .bg-details
@@ -349,18 +347,23 @@ td
   }
   .location-text
   {
+      width: 60px;
       margin-left: 150px;
-      padding-right: 150px;
+      padding-right: 210px;
   }
   .refresh-text1, .refresh-text2
   {
       margin-left: 220px;
-      padding-right: 140px;
+      padding-right: 210px;
   }
   .refresh-text1
   {
       margin-left: 225px;
     padding-right: 120px; 
+  }
+  .refresh-text2
+  {
+      width: 28px;
   }
   .details-title1, .details-title2
   {
@@ -384,7 +387,7 @@ td
   }
   .response_label, .addr_label
       {
-          font-size: 1.2em;
+          font-size: 1.55em;
       }
   @media screen and (max-width: 1800px) and (min-width: 1550px)
   {
@@ -426,18 +429,18 @@ td
           padding-right: 1px;
       }
   }
-  @media screen and (max-width: 1550px) and (min-width: 1300px)
+  @media screen and (max-width: 1550px) and (min-width: 1000px)
   {
-      .bg-phases, .bg-voltage
+      .bg-phases, .bg-voltage, .bg-cnf_det, .bg-address 
       {
-          width: 70%;
+          width: 80%;
       }
       td
       {
           padding: 0px;
       }
   }
-  @media screen and (max-width: 1300px) and (min-width: 1000px)
+  /* @media screen and (max-width: 1300px) and (min-width: 1000px)
   {
       .bg-phases
       {
@@ -472,7 +475,7 @@ td
       {
           padding-left: 50px !important;
       }
-  }
+  } */
   @media screen and (max-width: 1000px)
   {
       td
@@ -482,6 +485,10 @@ td
       .response_label, .addr_label
       {
           margin-left: 15px;
+      }
+      .bg-address, .bg-cnf_det, .bg-phases, .bg-voltage
+      {
+        padding-left: 20px;
       }
   }
 

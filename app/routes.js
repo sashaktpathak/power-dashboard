@@ -87,6 +87,15 @@ module.exports = function (app, passport) {
             }
         })
     })
+    app.get('/getLocations', function (req, res) {
+        connection.query('USE ' + dbconfig.database)
+        connection.query('SELECT location FROM locations', (err, rows, fields) => {
+            if (err) {
+                console.log(err)
+            }
+            res.send(rows)
+        });
+    })
 
 }
 
