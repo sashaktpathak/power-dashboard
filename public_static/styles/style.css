@@ -137,7 +137,7 @@ td
     -webkit-transition: .2s;
     transition: opacity .2s;
     margin-top: 100px;
-    margin-left: -90px;
+    margin-left: -60px;
     -webkit-transform:rotate(270deg);
     -moz-transform:rotate(270deg);
     -o-transform:rotate(270deg);
@@ -172,7 +172,7 @@ td
   .btnb
   {
       border-radius: 0px;
-      margin: 10px;
+      margin: 15px;
       width: 100px;
       height: 40px;
       box-shadow: 3px 3px #ddd;
@@ -277,7 +277,7 @@ td
   .range-img, .range-img1
   {
       border-radius: 50%;
-      margin-left: -20px;
+      margin-left: 10px;
   }
   .bg-phases
   {
@@ -307,7 +307,8 @@ td
       padding: 15px;
       transition: all 0.6s;
       margin: 10px;
-      padding-bottom: 100px;
+      margin-bottom: 15px;
+      padding-bottom: 60px;
       box-shadow: 1px 1px 1px 1px #666;
       
   }
@@ -405,6 +406,15 @@ td
       {
           display: inline-block;
           width: 31%;
+      }
+      .slider-row>td>div
+      {
+        width: 100px !important;
+      }
+      .labeldb2
+      {
+        margin-left: -13px;
+        width: 110px;
       }
   @media screen and (max-width: 1800px) and (min-width: 1550px)
   {
