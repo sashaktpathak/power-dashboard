@@ -335,7 +335,7 @@ td
   }
   .bg-cnf_det
   {
-      width: 44%;
+      width: 43.5%;
   }
   .location-text, .refresh-text1, .refresh-text2
   {
@@ -462,6 +462,10 @@ td
       {
           width: 80%;
       }
+      .bg-cnf_det
+      {
+          width: 82%;
+      }
       td
       {
           padding: 0px;
@@ -513,6 +517,10 @@ td
       {
           margin-left: 15px;
       }
+      .bg-details
+      {
+          margin-right: 0px;
+      }
       .bg-address, .bg-cnf_det, .bg-phases, .bg-voltage
       {
         padding-left: 20px;
@@ -532,6 +540,10 @@ td
   }
   @media screen and (max-width: 800px)
   {
+      .drpmn
+      {
+          display: none;
+      }
       .addr_label
       {
           font-size: 1.1em;

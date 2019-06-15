@@ -2,6 +2,7 @@ $("#header").load("header.html")
 $("#footer").load("footer.html")
 $('.phases').load('part1.html')
 var btnpress_turn = 0;
+var turn = 0;
 $(document).ready(function () {
 
     $('.noncout').load('part2.html', function () {
@@ -63,7 +64,6 @@ $(document).ready(function () {
 
         $('.btnb').click(function () {
             x = $(this).find('.light').html()
-            console.log(x)
             y = $(this).prev().parent().find('.id_number').html()
             y = parseInt(y)
             if (x == 'Trigger')
@@ -73,7 +73,6 @@ $(document).ready(function () {
             else
                 x = 3
             $.post('/putData', { value: x, rowv: y }, function (data) {
-                console.log(data)
                 getData3()
                 launch_toast()
             })
@@ -129,8 +128,24 @@ $(document).ready(function () {
     mediaquery(x)
     x.addListener(mediaquery)
 
+    $('.o_dropdwn').click(function () {
+        console.log("fd")
+        if (window.innerWidth <= 800) {
+            console.log("d")
+            if (turn == 0) {
+                $('.drpmn').css('display', 'block');
+                turn = 1;
+            }
+            else {
+                $('.drpmn').css('display', 'none');
+                turn = 0
+            }
+        }
+    })
 
 })
+
+//==========================================================
 
 function getData3() {
     $.post('/getData3', function (data) {
@@ -333,7 +348,6 @@ function refreshData() {
 
 var socket = io()
 socket.on('trydata', function (data) {
-    console.log(data)
     refreshData();
     setTimeout(() => {
         refreshData()
@@ -354,9 +368,7 @@ $('.btnpress_toggle').click(function () {
 })
 
 function increasebtnpress() {
-    console.log("ssd")
     btnpress_turn += 1
-    console.log("pressed: " + btnpress_turn)
 }
 
 function setvisibility() {
@@ -369,7 +381,21 @@ function setvisibility() {
 }
 setInterval(() => {
     setvisibility()
-}, 500);
+}, 400);
 
 document.getElementsByClassName('bg-cnf_det')[0].offsetWidth = document.getElementsByClassName('bg-address')[0].offsetWidth;
-console.log(document.getElementsByClassName('bg-address')[0].offsetWidth)
+
+$('.o_dropdwn').click(function () {
+    console.log("fd")
+    if (window.innerWidth <= 800) {
+        console.log("d")
+        if (turn == 0) {
+            $('.drpmn').css('display', 'block');
+            turn = 1;
+        }
+        else {
+            $('.drpmn').css('display', 'none');
+            turn = 0
+        }
+    }
+})
