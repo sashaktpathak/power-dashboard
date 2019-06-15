@@ -1,9 +1,18 @@
-$("#header").load("header.html")
-$("#footer").load("footer.html")
-$('.phases').load('part1.html')
 var btnpress_turn = 0;
 var turn = 0;
 $(document).ready(function () {
+    $("#header").load("header.html", function () {
+        $('.btn2').click(function () {
+            var str = '/getCSV?loc=' + $('.location-text').html() + '&date=' + $('.refresh-text1').html() + '&time=' + $('.refresh-text2').html();
+            // $.get('/getCSV', { loc: $('.location-text').html(), date: $('.refresh-text1').html(), time: $('.refresh-text2').html() }, (data) => {
+            //     console.log(data)
+
+            // })
+            window.open(str)
+        })
+    })
+    $("#footer").load("footer.html")
+    $('.phases').load('part1.html')
 
     $('.noncout').load('part2.html', function () {
         var slider = document.getElementById("myRange1");
@@ -101,7 +110,7 @@ $(document).ready(function () {
         $('.drpmnli').click(function () {
             $('.location-text').html($(this).text().toUpperCase())
         })
-        setTimeOut(() => { refreshData() }, 200);
+        setTimeout(() => { refreshData() }, 200);
     })
 
     function mediaquery(x) {
@@ -181,9 +190,9 @@ function refreshData() {
 
     $.post('/getData1', { loc: $('.location-text').html() }, (data) => {
         var t = 0, i = 1
+        //console.log(data)
         $('#3phase_tb1 tr').each(function () {
             if ($(this)[0].childNodes.length == 13 || $(this)[0].childNodes.length == 9) {
-
                 if (data[t].status == 1) {
                     if ($(this).find('.phase_status').length) {
                         $(this).find('.phase_status').removeClass('phase_inactive')
