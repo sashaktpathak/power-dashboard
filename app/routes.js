@@ -51,15 +51,15 @@ module.exports = function (app, passport) {
     })
 
     app.post('/getData1', function (req, res) {
-        getData1(res)
+        getData1(req.body.loc, res)
     })
 
     app.post('/getData2', function (req, res) {
-        getData2(res)
+        getData2(req.body.loc, res)
     })
 
     app.post('/getData3', function (req, res) {
-        getData3(res)
+        getData3(req.body.loc, res)
     })
 
     app.post('/getResp', function (req, res) {
@@ -75,7 +75,7 @@ module.exports = function (app, passport) {
     app.post('/putData', function (req, res) {
         console.log([req.body.value, req.body.rowv])
         connection.query('USE ' + dbconfig.database)
-        connection.query('UPDATE tb_status SET status = ? , timestamp = CURRENT_TIMESTAMP WHERE chno = ?', [req.body.value, req.body.rowv], (err) => {
+        connection.query('UPDATE tb_status SET status = ? , timestamp = CURRENT_TIMESTAMP WHERE chno = ? and location = (SELECT id from locations l WHERE l.location = ?)', [req.body.value, req.body.rowv, req.body.loc], (err) => {
 
             if (err) {
                 x = { status: 0 }
@@ -107,18 +107,18 @@ function isLoggedIn(req, res, next) {
     res.redirect('/login')
 }
 
-function getData1(res) {
+function getData1(loc, res) {
     connection.query('USE ' + dbconfig.database)
-    connection.query("SELECT * FROM tb_status where chno >= 1 and chno <= 24", (err, rows, fields) => {
+    connection.query("SELECT * FROM tb_status where chno >= 1 and chno <= 24 and location = (SELECT id from locations l WHERE l.location = ?)", [loc], (err, rows, fields) => {
         if (err)
             console.log(err)
         //console.log(rows)
         res.send(rows)
     })
 }
-function getData2(res) {
+function getData2(loc, res) {
     connection.query('USE ' + dbconfig.database)
-    connection.query("SELECT * FROM tb_status where chno >= 25 and chno <= 32", (err, rows, fields) => {
+    connection.query("SELECT * FROM tb_status where chno >= 25 and chno <= 32 and location = (SELECT id from locations l WHERE l.location = ?)", [loc], (err, rows, fields) => {
         if (err)
             console.log(err)
         //console.log(rows)
@@ -126,9 +126,9 @@ function getData2(res) {
     })
 }
 
-function getData3(res) {
+function getData3(loc, res) {
     connection.query('USE ' + dbconfig.database)
-    connection.query("SELECT * FROM tb_status where chno >= 33 and chno <= 36", (err, rows, fields) => {
+    connection.query("SELECT * FROM tb_status where chno >= 33 and chno <= 36 and location = (SELECT id from locations l WHERE l.location = ?)", [loc], (err, rows, fields) => {
         if (err)
             console.log(err)
         //console.log(rows)

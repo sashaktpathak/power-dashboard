@@ -72,7 +72,7 @@ $(document).ready(function () {
                 x = 2
             else
                 x = 3
-            $.post('/putData', { value: x, rowv: y }, function (data) {
+            $.post('/putData', { value: x, rowv: y, loc: $('.location-text').html() }, function (data) {
                 getData3()
                 launch_toast()
             })
@@ -101,6 +101,7 @@ $(document).ready(function () {
         $('.drpmnli').click(function () {
             $('.location-text').html($(this).text().toUpperCase())
         })
+        setTimeOut(() => { refreshData() }, 200);
     })
 
     function mediaquery(x) {
@@ -128,27 +129,12 @@ $(document).ready(function () {
     mediaquery(x)
     x.addListener(mediaquery)
 
-    $('.o_dropdwn').click(function () {
-        console.log("fd")
-        if (window.innerWidth <= 800) {
-            console.log("d")
-            if (turn == 0) {
-                $('.drpmn').css('display', 'block');
-                turn = 1;
-            }
-            else {
-                $('.drpmn').css('display', 'none');
-                turn = 0
-            }
-        }
-    })
-
 })
 
 //==========================================================
 
 function getData3() {
-    $.post('/getData3', function (data) {
+    $.post('/getData3', { loc: $('.location-text').html() }, function (data) {
         //console.log(data)
         t = 0
         $('#tb_configure tr').each(function () {
@@ -193,7 +179,7 @@ function launch_toast() {
 function refreshData() {
     getData3()
 
-    $.post('/getData1', (data) => {
+    $.post('/getData1', { loc: $('.location-text').html() }, (data) => {
         var t = 0, i = 1
         $('#3phase_tb1 tr').each(function () {
             if ($(this)[0].childNodes.length == 13 || $(this)[0].childNodes.length == 9) {
@@ -261,7 +247,7 @@ function refreshData() {
     })
 
 
-    $.post('/getData2', function (data) {
+    $.post('/getData2', { loc: $('.location-text').html() }, function (data) {
         t = 0
         $('.slider').each(function () {
             if (data[t].status == 0) {
@@ -300,7 +286,7 @@ function refreshData() {
         })
     })
     var cur_timestamp;
-    $.post('/getData2', function (data) {
+    $.post('/getData2', { loc: $('.location-text').html() }, function (data) {
         t = 0
         $('.slider1').each(function () {
             if (data[t].status == 0) {
@@ -385,17 +371,3 @@ setInterval(() => {
 
 document.getElementsByClassName('bg-cnf_det')[0].offsetWidth = document.getElementsByClassName('bg-address')[0].offsetWidth;
 
-$('.o_dropdwn').click(function () {
-    console.log("fd")
-    if (window.innerWidth <= 800) {
-        console.log("d")
-        if (turn == 0) {
-            $('.drpmn').css('display', 'block');
-            turn = 1;
-        }
-        else {
-            $('.drpmn').css('display', 'none');
-            turn = 0
-        }
-    }
-})

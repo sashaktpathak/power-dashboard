@@ -148,4 +148,20 @@
     $('.btn4').click(function () {
         window.location.href = '/logout'
     })
+    $('.o_dropdwn').click(function () {
+        console.log("fd")
+        if (window.innerWidth <= 800) {
+
+            if (turn == 0) {
+                console.log("d")
+                $('.drpmn').css('display', 'block');
+                turn = 1;
+            }
+            else {
+                console.log("e")
+                $('.drpmn').css('display', '');
+                turn = 0
+            }
+        }
+    })
 </script>
