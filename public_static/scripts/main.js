@@ -333,8 +333,28 @@ function refreshData() {
         })
     })
     var today = new Date()
-    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    var time = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+    var tempmonth = '' + (today.getMonth() + 1)
+    if ((tempmonth).length == 1) {
+        tempmonth = '0' + tempmonth
+    }
+    var tempdate = '' + today.getDate()
+    if ((tempdate).length == 1) {
+        tempdate = '0' + tempdate
+    }
+    var tempminutes = '' + today.getMinutes()
+    if ((tempminutes).length == 1) {
+        tempminutes = '0' + tempminutes
+    }
+    var tempseconds = '' + today.getSeconds()
+    if ((tempseconds).length == 1) {
+        tempseconds = '0' + tempseconds
+    }
+    var temphours = '' + today.getHours()
+    if ((temphours).length == 1) {
+        temphours = '0' + temphours
+    }
+    var date = today.getFullYear() + '-' + tempmonth + '-' + tempdate;
+    var time = temphours + ':' + tempminutes + ':' + tempseconds;
     //console.log(toString(today))
     $('.refresh-text1').html(date)
     $('.refresh-text2').html(time)
