@@ -39,6 +39,8 @@ th
     font-size: 1.4em;
     font-weight: bolder;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    padding-right: 25px;
 }
 hr
 {
@@ -121,11 +123,11 @@ td
   }
   .slider_black
   {
-      background: #111;
+      background: #000;
   }
   .slider_partial
   {
-    background-image: linear-gradient(0deg, black, rgb(130, 255, 130));
+    background: #666;
 }
   .slider, .slider1 {
     -webkit-appearance: none;
@@ -262,7 +264,15 @@ td
     margin: 5px;
     height: 50px;
   }
-  
+  .title2
+  {
+      margin-left: 20px;
+      margin-right: 20px;
+  }
+  .slider-row
+  {
+      width: 100%;
+  }
   .title3
   {
       background: rgba(250, 69, 23, 0.5);
@@ -300,6 +310,8 @@ td
       margin: 10px;
       box-shadow: 1px 1px 1px 1px #666;
       left: 55px;
+      padding-right: 0px;
+      padding-left: 12px;
   }
   .bg-configure
   {
@@ -381,7 +393,14 @@ td
       transition: all 0.6s;
       z-index: 100;
   } */
-
+  #tb_voltage, .noncout
+  {
+      width: 100%;
+  }
+  #tb_voltage>tbody
+  {
+      width: 100%;
+  }
   .form-group
   {
       margin-top: 20px;

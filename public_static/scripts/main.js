@@ -89,7 +89,9 @@ $(document).ready(function () {
     })
     $('.btn-addr').click(function () {
         x = $('#addr').val()
-        $.post('/getResp', { value: x }, function (data) {
+        id_addr = $('#id_addr').val()
+        length_addr = $('#length_addr').val()
+        $.post('/getResp', { value: x, id: id_addr, length: length_addr }, function (data) {
             //console.log(data)
             if (data.length > 0) {
                 $('#resp_here').html(data[0].response)
