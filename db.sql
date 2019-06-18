@@ -106,8 +106,9 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` text,
   `password` text,
+  `type` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +117,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'sashakt','$2a$10$Jou8rTHA0RTk7umx6sTrNuxIDoSnxxvUOZwwJjs74Jy.fLb0nR0WO');
+INSERT INTO `users` VALUES (5,'admin','$2a$10$UL/lhDdEgk2j71BgF63JTe6UEKPEJ.X1JAJOw2aIYGc6K4cZTcBA6',0),(7,'sashakt','$2a$10$IIFmbzm8DIrrEJtHMfhsAOFcx2sjXlJfrt2KQ65y0kLTz1m.BeBC6',1),(8,'test2','$2a$10$G1rbGw.xzF94Qyl0HiThQOmtjWPDsxywQVPI.BqQjWoFn0x5rOFii',1),(9,'test','$2a$10$w3OMM4ilveaYu87mhaWCcuT8eJYRW6DKDMIBcCyWzRi5dccONVuH6',1),(11,'sashak','$2a$10$.Iw2A6BzCoxn.RHv771bn.vZ.9rOlZFX6zUhoZlrwzzOoDcp6qLIi',1),(13,'dsds','$2a$10$cYzvrR0wFakUtZ5sxP6UHeY1oDCCfJcFQE94EiogwrLOH.qoyq7FG',1),(14,'ddf','$2a$10$eoO/czXcwN8s5GFO6hQU6OBwkiX994Bl5aTSSLe2nPyLGm3jkDZ6S',1),(16,'dd','$2a$10$5WNRsNRqdvZ9DM6NADp19.Z5o5GkKdYTg67EPCT6usSMO7X5SRoQy',0),(17,'norm','$2a$10$BOOBeUYv2ZwbBqNe2ta3h.9bj.btKZPm7cCw9.N5ybyMTPU79T2yK',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -129,4 +130,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-17 16:25:34
+-- Dump completed on 2019-06-18 13:34:27

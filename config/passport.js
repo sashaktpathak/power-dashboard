@@ -35,10 +35,13 @@ module.exports = function (passport) {
                         var newUserMysql = {
                             username: username,
                             password: bcrypt.hashSync(password, null, null)
-                        }
-                        var insertQuery = "INSERT INTO users(username, password) VALUES(?, ?)"
 
-                        connection.query(insertQuery, [newUserMysql.username, newUserMysql.password],
+                        }
+                        var u_type = 1;
+                        if (req.body.type)
+                            u_type = 0
+                        var insertQuery = "INSERT INTO users(username, password, type) VALUES(?, ?, ?)"
+                        connection.query(insertQuery, [newUserMysql.username, newUserMysql.password, u_type],
                             (err, rows) => {
                                 newUserMysql.id = rows.insertId;
 
@@ -66,7 +69,6 @@ module.exports = function (passport) {
                         }
                         if (!bcrypt.compareSync(password, rows[0].password))
                             return done(null, false, req.flash('loginMessage', 'Wrong Password'))
-
                         return done(null, rows[0])
                     })
             }))

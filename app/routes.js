@@ -4,6 +4,7 @@ var connection = mysql.createConnection(dbconfig.connection)
 var express = require('express')
 var path = require('path')
 var mime = require('mime')
+var bcrypt = require('bcrypt-nodejs')
 var fs = require('fs')
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const csvWriter = createCsvWriter({
@@ -23,9 +24,11 @@ module.exports = function (app, passport) {
     app.get('/login', function (req, res) {
         res.render('login.ejs', { message: req.flash('loginMessage') })
     })
+    app.get('/admin', isadminLoggedIn, function (req, res) {
+        res.render('admin')
+    })
 
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/',
         failureRedirect: '/login',
         failureFlash: true
     }),
@@ -36,7 +39,10 @@ module.exports = function (app, passport) {
             else {
                 req.session.cookie.expires = false
             }
-            res.redirect('/')
+            if (req.user.type == 1)
+                res.redirect('/')
+            else
+                res.redirect('/admin?id=' + req.user.id)
         }
     )
 
@@ -73,7 +79,33 @@ module.exports = function (app, passport) {
     app.post('/getData3', function (req, res) {
         getData3(req.body.loc, res)
     })
+    app.post('/admin@allusers', function (req, res) {
+        connection.query('USE ' + dbconfig.database)
+        connection.query('SELECT id,username,type FROM users', (err, rows, fields) => {
+            if (err)
+                console.log(err)
+            res.send(rows)
+        })
 
+    })
+    app.post('/admin@deluser', function (req, res) {
+        connection.query('USE ' + dbconfig.database)
+        connection.query('DELETE FROM users where id = ?', [req.body.id], (err, rows, fields) => {
+            if (err)
+                console.log(err)
+            res.send("Success")
+        })
+
+    })
+    app.post('/apply_changes@password', function (req, res) {
+        var npswd = bcrypt.hashSync(req.body.npwd, null, null)
+        connection.query('USE ' + dbconfig.database)
+        connection.query('UPDATE users SET password = ? WHERE id = ?', [npswd, req.body.id], (err, rows, fields) => {
+            if (err)
+                console.log(err)
+            res.send("Success")
+        })
+    })
     app.post('/getResp', function (req, res) {
         connection.query('USE ' + dbconfig.database)
         connection.query("SELECT response FROM tb_address where address = ? ", [req.body.value], (err, rows, fields) => {
@@ -160,7 +192,13 @@ function isLoggedIn(req, res, next) {
 
     res.redirect('/login')
 }
+function isadminLoggedIn(req, res, next) {
+    if (req.user.type == 0) {
+        return next()
+    }
 
+    res.redirect('/')
+}
 function getData1(loc, res) {
     connection.query('USE ' + dbconfig.database)
     connection.query("SELECT * FROM tb_status where chno >= 1 and chno <= 24 and location = (SELECT id from locations l WHERE l.location = ?)", [loc], (err, rows, fields) => {
