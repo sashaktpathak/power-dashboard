@@ -55,6 +55,35 @@ module.exports = function (app, passport) {
         failureRedirect: '/signup',
         failureFlash: true
     }))
+    app.post('/adduser', function (req, res) {
+        connection.query('SELECT * FROM users where username = ?',
+            [req.body.username], function (err, rows) {
+                if (err)
+                    console.log(err)
+                if (rows.length) {
+                    console.log("length error!")
+                }
+                else {
+                    var newUserMysql = {
+                        username: req.body.username,
+                        password: bcrypt.hashSync(req.body.password, null, null)
+
+                    }
+                    var u_type = 1;
+                    console.log('--=--=', req.body.type)
+                    if (req.body.type == 'true') {
+                        u_type = 0
+                        console.log("sfds")
+                    }
+                    var insertQuery = "INSERT INTO users(username, password, type) VALUES(?, ?, ?)"
+                    connection.query(insertQuery, [newUserMysql.username, newUserMysql.password, u_type],
+                        (err, rows) => {
+                            newUserMysql.id = rows.insertId;
+                            res.send("Success")
+                        })
+                }
+            })
+    })
 
     let reqPath = path.join(__dirname, '../')
     app.get('/', isLoggedIn, function (req, res) {

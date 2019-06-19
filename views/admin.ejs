@@ -241,7 +241,20 @@
     }
     activeusers()
     $('#adduser').click(function () {
-        $('.list_user').load('add_users.html')
+        $('.list_user').load('add_users.html', function () {
+            $('.btn-adduser').click(function () {
+                $.post('/adduser', { username: $('.username').val(), password: $('.password').val(), type: $('.admincheck').is(':checked') }, function (data) {
+                    console.log(data)
+                    if (data == 'Success') {
+                        alert('User Added Successfuly!')
+                        $('.username').val('')
+                        $('.password').val('')
+                        $('.admincheck').prop("checked", false)
+                    }
+                })
+            })
+        })
+
     })
     $('#dashboard').click(function () {
         $('.list_user').load('active_users.html', function () {
@@ -253,6 +266,7 @@
             editusers()
         })
     })
+
 </script>
 
 </html>
