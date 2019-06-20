@@ -230,7 +230,10 @@
             $('.btn-apply').click(function () {
                 if ($('.pswd').val() == $('.cnfpswd').val()) {
                     $.post('/apply_changes@password', { id: $('.edit_user_id').val(), npwd: $('.pswd').val() }, function (data) {
-                        console.log(data)
+                        if (data == "Success") {
+                            $('#changemodal').modal('toggle');
+                            alert("Password Changed Successfuly")
+                        }
                     })
                 }
                 else {
