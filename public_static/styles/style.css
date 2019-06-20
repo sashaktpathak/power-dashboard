@@ -129,6 +129,18 @@ td
   {
     background: #666;
 }
+.username
+{
+    display: none;
+}
+.username_here
+{
+    font-weight: bolder;
+    font-size: 16px;
+    margin-top: -16px;
+    margin-bottom: 8px;
+    margin-left: 50px !important;
+}
   .slider, .slider1 {
     -webkit-appearance: none;
     width: 200px !important;

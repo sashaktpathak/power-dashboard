@@ -87,7 +87,7 @@ module.exports = function (app, passport) {
 
     let reqPath = path.join(__dirname, '../')
     app.get('/', isLoggedIn, function (req, res) {
-        res.render('home')
+        res.render('home', { name: req.user.username })
     })
 
     //app.use('/home', express.static(reqPath + 'public_static'))

@@ -27,7 +27,7 @@
             <h2 class="tobevanished">Login</h2>
 
             <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                aria-hidden="true">
+                aria-hidden="true" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog" role="document">
                     <form action="/login" method="post">
                         <div class="modal-content">
@@ -95,5 +95,10 @@
         keyboard: false
     })
 </script>
+<style>
+    .modal-header .close {
+        display: none;
+    }
+</style>
 
 </html>

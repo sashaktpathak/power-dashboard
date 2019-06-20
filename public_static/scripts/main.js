@@ -10,6 +10,7 @@ $(document).ready(function () {
             // })
             window.open(str)
         })
+        $('.username_here').html('Welcome!  &nbsp&nbsp' + $('.username').html())
     })
     $("#footer").load("footer.html")
     $('.phases').load('part1.html')
