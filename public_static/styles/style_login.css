@@ -12,3 +12,7 @@ html
 {
     background-color: #3F51B5;
 }
+.list_user h2
+{
+    cursor: pointer;
+}

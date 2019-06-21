@@ -110,7 +110,7 @@ module.exports = function (app, passport) {
     })
     app.post('/admin@allusers', function (req, res) {
         connection.query('USE ' + dbconfig.database)
-        connection.query('SELECT id,username,type FROM users', (err, rows, fields) => {
+        connection.query('SELECT id,username,type,active FROM users', (err, rows, fields) => {
             if (err)
                 console.log(err)
             res.send(rows)
@@ -120,6 +120,24 @@ module.exports = function (app, passport) {
     app.post('/admin@deluser', function (req, res) {
         connection.query('USE ' + dbconfig.database)
         connection.query('DELETE FROM users where id = ?', [req.body.id], (err, rows, fields) => {
+            if (err)
+                console.log(err)
+            res.send("Success")
+        })
+
+    })
+    app.post('/admin@deactivate', function (req, res) {
+        connection.query('USE ' + dbconfig.database)
+        connection.query('UPDATE users SET active = 0 where id = ?', [req.body.id], (err, rows, fields) => {
+            if (err)
+                console.log(err)
+            res.send("Success")
+        })
+
+    })
+    app.post('/admin@activate', function (req, res) {
+        connection.query('USE ' + dbconfig.database)
+        connection.query('UPDATE users SET active = 1 where id = ?', [req.body.id], (err, rows, fields) => {
             if (err)
                 console.log(err)
             res.send("Success")

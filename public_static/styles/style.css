@@ -209,6 +209,10 @@ td
       border-radius: 45%;
       margin-left: -42px;
   }
+  .btngrps
+  {
+      transition: all 0.5s !important;
+  }
   .lightoff
   {
     background-color: rgba(50,50,50,0.05);
@@ -502,42 +506,6 @@ td
           padding: 0px;
       }
   }
-  /* @media screen and (max-width: 1300px) and (min-width: 1000px)
-  {
-      .bg-phases
-      {
-          width: 60%;
-      }
-      .bg-voltage
-      {
-          width: 60%;
-      }
-      .bg-configure, .bg-address
-      {
-          width: 38%;
-          right: -25px;
-      }
-      td
-      {
-          padding: 0px;
-      }
-      .slider
-      {
-          margin-left: 2px;
-      }
-      .slider1
-      {
-          margin: 0px !important;
-      }
-      .range-img1
-      {
-          margin-left: 70px !important;
-      }
-      .tb_voltage_small_1 .id, .tb_voltage_small_1 .labeldb21, .tb_voltage_small_2 .id, .tb_voltage_small_2 .labeldb21
-      {
-          padding-left: 50px !important;
-      }
-  } */
   @media screen and (max-width: 1000px)
   {
       td
@@ -575,6 +543,10 @@ td
       {
           display: none;
       }
+     .drpmn>li:hover
+      {  
+        text-decoration-color: red;
+      }
       .addr_label
       {
           font-size: 1.1em;
@@ -587,6 +559,28 @@ td
       .addr_label:nth-child(2)
       {
           padding-right: 20%;
+      }
+      .btngrps
+      {
+          z-index: 100;
+          transition: all 0.5s !important;
+          top: 5px !important;
+          right: 60px;
+        display: none;
+        position: absolute !important; 
+        background-color: white;
+        color: #000 !important;
+        box-shadow: 2px 2px #aaa;
+      }
+      .btngrps .username_here
+      {
+          margin-top: 10px;
+          margin-bottom: 0px;
+      }
+      .dropdwn
+      {
+          background-color: white !important;
+          color: #000 !important;
       }
   }
   @media screen and (max-width: 500px)

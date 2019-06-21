@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 
@@ -87,7 +88,7 @@
                 <ul class="nav navbar-nav">
 
 
-                    <li style="color:white;margin-top:15px;margin-left:-10px"><b>
+                    <li style="color:white;margin-top:15px;margin-left:-10px"><b class="welcome_user">
                             Welcome !</b>
                     </li>
                     <li>
@@ -139,7 +140,14 @@
                     </a>
 
                 </li>
+                <li class=" treeview" name="active_users" id="active_users">
+                    <a href="#">
+                        <i class="fa fa-user"></i> <span>Active/Inactive Users</span>
+                        <span class="pull-right-container">
+                        </span>
+                    </a>
 
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -148,8 +156,8 @@
 </body>
 
 <script>
-    //$('#tb_list_users').DataTable();
-    //$('.dataTables_length').addClass('bs-select');
+    var activeturn = 1;
+    var inactiveturn = 0;
     function GetURLParameter(sParam) {
         var sPageURL = window.location.search.substring(1);
         var sURLVariables = sPageURL.split('&');
@@ -163,7 +171,7 @@
 
     var id_url = GetURLParameter('id');
     function activeusers() {
-        $('.list_user').load('active_users.html', function () {
+        $('.list_user').load('list_users.html', function () {
 
 
             function check() {
@@ -200,6 +208,9 @@
                         var ro = '<tr><td>' + (i_count) + '</td><td>' + data[i].username + '</td><td>' + user_type + '</td><td><input type="checkbox" name="user_id" value="' + data[i].id + '"></td></tr>'
                         $('#tb_list_users tr:last').after(ro)
                         i_count++
+                    }
+                    else if (data[i].id == id_url) {
+                        $('.welcome_user').html('Welcome ! &nbsp&nbsp' + data[i].username)
                     }
                 }
             })
@@ -259,14 +270,121 @@
         })
 
     })
+    function setvisibility_active() {
+        if (activeturn % 2 == 0) {
+            $('.active_container').css("display", "none")
+        }
+        else {
+            $('.active_container').css("display", "block")
+        }
+    }
+    function setvisibility_inactive() {
+        if (inactiveturn % 2 == 0) {
+            $('.inactive_container').css("display", "none")
+        }
+        else {
+            $('.inactive_container').css("display", "block")
+        }
+    }
+    function addtotb() {
+        var active_count = 1, inactive_count = 1
+        $.post('/admin@allusers', function (data) {
+            for (i = 0; i < data.length; i++) {
+                if (data[i].id != id_url && data[i].active >= 1) {
+                    if (data[i].type)
+                        user_type = 'Normal User'
+                    else
+                        user_type = 'Administrator'
+                    var ro = '<tr><td>' + (active_count) + '</td><td>' + data[i].username + '</td><td>' + user_type + '</td><td><input type="checkbox" name="active_user_id" value="' + data[i].id + '"></td></tr>'
+                    $('#tb_active_users tr:last').after(ro)
+                    active_count++
+                }
+                if (data[i].id != id_url && data[i].active == 0) {
+                    if (data[i].type)
+                        user_type = 'Normal User'
+                    else
+                        user_type = 'Administrator'
+                    var ro = '<tr><td>' + (inactive_count) + '</td><td>' + data[i].username + '</td><td>' + user_type + '</td><td><input type="checkbox" name="inactive_user_id" value="' + data[i].id + '"></td></tr>'
+                    $('#tb_inactive_users tr:last').after(ro)
+                    inactive_count++
+                }
+            }
+        })
+    }
+    function active_inactive() {
+        $('.active_down').click(function () {
+            activeturn += 1;
+            setvisibility_active()
+        })
+        $('.inactive_down').click(function () {
+            inactiveturn += 1;
+            setvisibility_inactive()
+        })
+        addtotb();
+        $('.btn-user-deactivate').click(function () {
+            var count1 = 0
+            $('input[name="active_user_id"]').each(function () {
+                if ($(this).is(":checked")) {
+                    var vv = $(this)
+                    $.post('/admin@deactivate', { id: $(this).val() }, function (data) {
+                        if (data == "Success") {
+                            $("#tb_inactive_users").find("tr:gt(0)").remove();
+                            $("#tb_active_users").find("tr:gt(0)").remove();
+                            addtotb();
+                        }
+                    })
+                    count1++
+                }
+            })
+            if (count1) {
+                alert("Users Deactivated Sucessfuly")
+            }
+            else {
+
+                alert("Please Select Atleast one checkbox")
+                return false;
+            }
+        })
+        $('.btn-user-active').click(function () {
+            var count2 = 0
+            $('input[name="inactive_user_id"]').each(function () {
+                if ($(this).is(":checked")) {
+                    var vv = $(this)
+                    $.post('/admin@activate', { id: $(this).val() }, function (data) {
+                        if (data == "Success") {
+                            $("#tb_inactive_users").find("tr:gt(0)").remove();
+                            $("#tb_active_users").find("tr:gt(0)").remove();
+                            addtotb();
+                        }
+                    })
+                    count2++
+                }
+            })
+            if (count2) {
+                alert("Users Activated Sucessfuly")
+            }
+            else {
+
+                alert("Please Select Atleast one checkbox")
+                return false;
+            }
+        })
+    }
     $('#dashboard').click(function () {
-        $('.list_user').load('active_users.html', function () {
+        $('.list_user').load('list_users.html', function () {
             activeusers()
         })
     })
     $('#edituser').click(function () {
         $('.list_user').load('edit_users.html', function () {
             editusers()
+        })
+    })
+    $('#active_users').click(function () {
+        $('.list_user').load('active_users.html', function () {
+            setvisibility_active()
+            setvisibility_inactive()
+            active_inactive()
         })
     })
 

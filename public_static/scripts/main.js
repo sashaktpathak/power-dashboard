@@ -10,7 +10,9 @@ $(document).ready(function () {
             // })
             window.open(str)
         })
-        $('.username_here').html('Welcome!  &nbsp&nbsp' + $('.username').html())
+        $('.username_here').html('Welcome !  &nbsp&nbsp' + $('.username').html())
+        setvisibility()
+
     })
     $("#footer").load("footer.html")
     $('.phases').load('part1.html')
@@ -387,6 +389,7 @@ $('.btnpress_toggle').click(function () {
 
 function increasebtnpress() {
     btnpress_turn += 1
+    setvisibility()
 }
 
 function setvisibility() {
@@ -397,9 +400,6 @@ function setvisibility() {
         $('.btngrps').css('display', 'block')
     }
 }
-setInterval(() => {
-    setvisibility()
-}, 400);
 
 document.getElementsByClassName('bg-cnf_det')[0].offsetWidth = document.getElementsByClassName('bg-address')[0].offsetWidth;
 

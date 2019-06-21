@@ -69,6 +69,8 @@ module.exports = function (passport) {
                         }
                         if (!bcrypt.compareSync(password, rows[0].password))
                             return done(null, false, req.flash('loginMessage', 'Wrong Password'))
+                        if (!rows[0].active)
+                            return done(null, false, req.flash('loginMessage', 'User Deactivated, Contact Administrator.'))
                         return done(null, rows[0])
                     })
             }))
